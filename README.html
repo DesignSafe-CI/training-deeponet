@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>General info &#8212; DesignSafe DeepONet training</title>
+    <title>Deep Operator Network (DeepONet) &#8212; DesignSafe DeepONet training</title>
   
   
   
@@ -174,7 +174,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    General info
+                    Deep Operator Network (DeepONet)
                 </a>
             </li>
         </ul>
@@ -355,7 +355,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>General info</h1>
+    <h1>Deep Operator Network (DeepONet)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -369,12 +369,15 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="general-info">
-<h1>General info<a class="headerlink" href="#general-info" title="Link to this heading">#</a></h1>
-<p>This Git repository contains codes for the DeepONet to map a random loading condition (displacement-controlled) to the deflection of a cantilever beam.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="deep-operator-network-deeponet">
+<h1>Deep Operator Network (DeepONet)<a class="headerlink" href="#deep-operator-network-deeponet" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p>Somdatta Goswami</p>
+</div></blockquote>
+<p>Traditional numerical modeling techniques, while accurate, often prove limiting for real-time predictions due to their computational intensity. Machine learning (ML)-based surrogate models have emerged as a faster alternative. However, these surrogates are constrained by their training data. For instance, an ML model trained to predict structural displacements based on specific earthquake records is limited to that finite dataset, as it fails to capture the underlying relationship between earthquake loading (input functions) and displacement (output functions). Neural Operators address this limitation by learning function-to-function mappings. A notable example in this category is the Deep Operator Network (DeepONet). The DeepONet architecture comprises two neural networks: a branch net that processes the input function, and a trunk net that handles the locations where the output function is evaluated. This structure enables DeepONet to learn the mapping between entire function spaces, rather than just specific input-output pairs. In the context of structural analysis, DeepONet can potentially learn the general relationship between loading conditions and the resulting deflected shapes of beams. This approach promises greater flexibility and generalization capability compared to traditional analytical methods, that needs to be simulated for every loading condition. This Git repository contains codes for the DeepONet to map a random loading condition (displacement-controlled) to the deflection of a cantilever beam.</p>
 <p align="center">
   <img src="Schematic.png" width="900" />
-</p>
+</p> 
 <div class="toctree-wrapper compound">
 </div>
 </section>
