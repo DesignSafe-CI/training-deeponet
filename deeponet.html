@@ -421,6 +421,7 @@
 <span class="kn">import</span> <span class="nn">sklearn.metrics</span>
 <span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">griddata</span>
 <span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">SymLogNorm</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -695,55 +696,68 @@ Shape of y-displacement matrix corresponding to the testing loads: (200, 1314)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inputs_train</span><span class="p">)</span>
-<span class="c1">## Training of DeepONet</span>
-<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="c1"># start time of training</span>
+
+<span class="c1"># Training of DeepONet</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>  <span class="c1"># start time of training</span>
 <span class="n">best_test_mse</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>  <span class="c1"># Initialize with infinity</span>
 
-<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;------------- START TRAINING -------------&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;------------- START TRAINING -------------&quot;</span><span class="p">)</span>
 <span class="c1"># Save initial model at 0th iteration</span>
+
 <span class="n">save_model_params</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">resultdir</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;model_params_best.pkl&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Saved initial model at iteration 0&quot;</span><span class="p">)</span>
-
 <span class="n">iteration_list</span><span class="p">,</span> <span class="n">loss_list</span><span class="p">,</span> <span class="n">test_loss_list</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
-<span class="n">iteration</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
+<span class="c1"># Create tqdm progress bar</span>
+<span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;Training&#39;</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">175</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">:</span>
+    <span class="c1"># Shuffle and batch data</span>
     <span class="n">indices</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">num_samples</span><span class="p">)</span>
     <span class="n">batch_index</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">bs</span><span class="p">]</span>
     <span class="n">inputs_train_shuffled</span> <span class="o">=</span> <span class="n">inputs_train</span><span class="p">[</span><span class="n">batch_index</span><span class="p">]</span>
     <span class="n">outputs_x_train_shuffled</span> <span class="o">=</span> <span class="n">outputs_x_train</span><span class="p">[</span><span class="n">batch_index</span><span class="p">]</span>
     <span class="n">outputs_y_train_shuffled</span> <span class="o">=</span> <span class="n">outputs_y_train</span><span class="p">[</span><span class="n">batch_index</span><span class="p">]</span>
+    <span class="c1"># Set target values</span>
     <span class="n">target_values_x</span> <span class="o">=</span> <span class="n">outputs_x_train_shuffled</span>
     <span class="n">target_values_y</span> <span class="o">=</span> <span class="n">outputs_y_train_shuffled</span>
     <span class="n">branch_inputs</span> <span class="o">=</span> <span class="n">inputs_train_shuffled</span>
     <span class="n">trunk_inputs</span> <span class="o">=</span> <span class="n">grid</span>
-
-    <span class="n">params</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">network_update</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">branch_inputs</span><span class="p">,</span> <span class="n">trunk_inputs</span><span class="p">,</span> <span class="n">target_values_x</span><span class="p">,</span> <span class="n">target_values_y</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">)</span>
-
+    <span class="c1"># Update network</span>
+    <span class="n">params</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">network_update</span><span class="p">(</span>
+        <span class="n">params</span><span class="p">,</span> <span class="n">branch_inputs</span><span class="p">,</span> <span class="n">trunk_inputs</span><span class="p">,</span>
+        <span class="n">target_values_x</span><span class="p">,</span> <span class="n">target_values_y</span><span class="p">,</span> <span class="n">opt_state</span>
+    <span class="p">)</span>
+    <span class="c1"># Evaluate and save model every 1000 iterations</span>
     <span class="k">if</span> <span class="n">iteration</span> <span class="o">%</span> <span class="mi">1000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        
         <span class="n">predictions_x</span><span class="p">,</span> <span class="n">predictions_y</span> <span class="o">=</span> <span class="n">DeepONet</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">branch_inputs</span><span class="p">,</span> <span class="n">trunk_inputs</span><span class="p">)</span>
-        <span class="n">test_mse</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">predictions_x</span> <span class="o">-</span> <span class="n">target_values_x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">predictions_y</span> <span class="o">-</span> <span class="n">target_values_y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-
-        <span class="c1"># Compare current test error with the best so far</span>
+        <span class="n">test_mse</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">predictions_x</span> <span class="o">-</span> <span class="n">target_values_x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> \
+                   <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">predictions_y</span> <span class="o">-</span> <span class="n">target_values_y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">current_loss</span> <span class="o">=</span> <span class="n">objective</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">branch_inputs</span><span class="p">,</span> <span class="n">trunk_inputs</span><span class="p">,</span>
+                               <span class="n">target_values_x</span><span class="p">,</span> <span class="n">target_values_y</span><span class="p">)</span>
+        <span class="c1"># Update best model if needed</span>
         <span class="k">if</span> <span class="n">test_mse</span> <span class="o">&lt;</span> <span class="n">best_test_mse</span><span class="p">:</span>
             <span class="n">best_test_mse</span> <span class="o">=</span> <span class="n">test_mse</span>
-            <span class="c1"># Save the model as it&#39;s the best so far</span>
             <span class="n">save_model_params</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">resultdir</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;model_params_best.pkl&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;New best model saved at iteration </span><span class="si">{</span><span class="n">iteration</span><span class="si">}</span><span class="s2"> with test MSE: </span><span class="si">{</span><span class="n">test_mse</span><span class="si">:</span><span class="s2">.7f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
+            <span class="n">desc</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Training (New Best: </span><span class="si">{</span><span class="n">test_mse</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1"> @ iter </span><span class="si">{</span><span class="n">iteration</span><span class="si">}</span><span class="s1">)&#39;</span>
+            <span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="n">desc</span><span class="p">)</span>
+        <span class="c1"># Calculate training time</span>
         <span class="n">finish</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iteration: </span><span class="si">{</span><span class="n">iteration</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2">, Train loss: </span><span class="si">{</span><span class="n">objective</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="w"> </span><span class="n">branch_inputs</span><span class="p">,</span><span class="w"> </span><span class="n">trunk_inputs</span><span class="p">,</span><span class="w"> </span><span class="n">target_values_x</span><span class="p">,</span><span class="w"> </span><span class="n">target_values_y</span><span class="p">)</span><span class="si">:</span><span class="s2">.7f</span><span class="si">}</span><span class="s2">, Test loss: </span><span class="si">{</span><span class="n">test_mse</span><span class="si">:</span><span class="s2">.7f</span><span class="si">}</span><span class="s2">, Best test loss: </span><span class="si">{</span><span class="n">best_test_mse</span><span class="si">:</span><span class="s2">.7f</span><span class="si">}</span><span class="s2">, Time: </span><span class="si">{</span><span class="n">finish</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="n">iteration_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">iteration</span><span class="p">)</span>
-    <span class="n">loss_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">objective</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">branch_inputs</span><span class="p">,</span> <span class="n">trunk_inputs</span><span class="p">,</span> <span class="n">target_values_x</span><span class="p">,</span> <span class="n">target_values_y</span><span class="p">))</span>
-    <span class="n">test_loss_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_mse</span><span class="p">)</span>
-
+        <span class="c1"># Update progress bar description with metrics</span>
+        <span class="n">pbar</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">({</span>
+            <span class="s1">&#39;Train Loss&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">current_loss</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Test Loss&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">test_mse</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Best Test&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">best_test_mse</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Time&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">finish</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">s&#39;</span>
+        <span class="p">})</span>
+        <span class="c1"># Store metrics for plotting</span>
+        <span class="n">iteration_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">iteration</span><span class="p">)</span>
+        <span class="n">loss_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_loss</span><span class="p">)</span>
+        <span class="n">test_loss_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_mse</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
     <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resultdir</span><span class="p">,</span> <span class="s1">&#39;iteration_list.npy&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">iteration_list</span><span class="p">))</span>
     <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resultdir</span><span class="p">,</span> <span class="s1">&#39;loss_list.npy&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">loss_list</span><span class="p">))</span>
     <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resultdir</span><span class="p">,</span> <span class="s1">&#39;test_loss_list.npy&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">test_loss_list</span><span class="p">))</span>
-
 <span class="c1"># Plotting code remains the same</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iteration_list</span><span class="p">,</span> <span class="n">loss_list</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Training loss&#39;</span><span class="p">)</span>
@@ -754,10 +768,8 @@ Shape of y-displacement matrix corresponding to the testing loads: (200, 1314)
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
 <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resultdir</span><span class="p">,</span> <span class="s1">&#39;loss_plot.pdf&#39;</span><span class="p">))</span>
-
 <span class="c1"># end timer</span>
 <span class="n">finish</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time (sec) to complete:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">finish</span><span class="p">))</span>
