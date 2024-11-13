@@ -8,3 +8,6 @@ Traditional numerical modeling techniques, while accurate, often prove limiting 
   <br/>
   <strong>Schematic</strong>
 </p>
+
+For instructions on how to start a GPU Jupyter, refer to [DesignSafe user guide](https://www.designsafe-ci.org/user-guide/tools/jupyterhub/#launch-the-jupyter-lab-hpc-gpu)
+
