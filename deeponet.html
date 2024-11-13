@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>The script solves the linear elasticity equation on the cantilever beam under displacement boundary conditions. Governing equation: \(-\nabla\cdot \sigma = 0\). &#8212; DesignSafe DeepONet training</title>
+    <title>DeepONet &#8212; DesignSafe DeepONet training</title>
   
   
   
@@ -177,7 +177,7 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">The script solves the linear elasticity equation on the cantilever beam under displacement boundary conditions. Governing equation: <span class="math notranslate nohighlight">\(-\nabla\cdot \sigma = 0\)</span>.</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">DeepONet</a></li>
 </ul>
 
     </div>
@@ -373,7 +373,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -384,11 +386,26 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>The script solves the linear elasticity equation on the cantilever beam under displacement boundary conditions. Governing equation: -\nabla\cdot \sigma = 0.</h1>
+    <h1>DeepONet</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-elastic-cantilever-beam-under-displacement-boundary-conditions">Linear elastic cantilever beam under displacement boundary conditions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-packages">Install packages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fetch-geometry-and-trained-model-data">Fetch geometry and trained model data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-neural-network">Define a Neural Network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -398,9 +415,39 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="the-script-solves-the-linear-elasticity-equation-on-the-cantilever-beam-under-displacement-boundary-conditions-governing-equation-nabla-cdot-sigma-0">
-<h1>The script solves the linear elasticity equation on the cantilever beam under displacement boundary conditions. Governing equation: <span class="math notranslate nohighlight">\(-\nabla\cdot \sigma = 0\)</span>.<a class="headerlink" href="#the-script-solves-the-linear-elasticity-equation-on-the-cantilever-beam-under-displacement-boundary-conditions-governing-equation-nabla-cdot-sigma-0" title="Link to this heading">#</a></h1>
-<img src="Schematic.png" width=1150 height=550 /><div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="deeponet">
+<h1>DeepONet<a class="headerlink" href="#deeponet" title="Link to this heading">#</a></h1>
+<section id="linear-elastic-cantilever-beam-under-displacement-boundary-conditions">
+<h2>Linear elastic cantilever beam under displacement boundary conditions<a class="headerlink" href="#linear-elastic-cantilever-beam-under-displacement-boundary-conditions" title="Link to this heading">#</a></h2>
+<p>Governing equation: <span class="math notranslate nohighlight">\(-\nabla\cdot \sigma = 0\)</span>.</p>
+<img src="https://github.com/DesignSafe-Training/deeponet/blob/main/Schematic.png?raw=true" width=1150 height=550 /><section id="install-packages">
+<h3>Install packages<a class="headerlink" href="#install-packages" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>jax<span class="o">[</span>cuda<span class="o">]</span><span class="w"> </span>numpy<span class="w"> </span>scikit-learn<span class="w"> </span>flax<span class="w"> </span>scipy<span class="w"> </span>termcolor<span class="w"> </span>tqdm<span class="w"> </span>matplotlib<span class="w"> </span>seaborn<span class="w"> </span>--user<span class="w"> </span>--quiet
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fetch-geometry-and-trained-model-data">
+<h3>Fetch geometry and trained model data<a class="headerlink" href="#fetch-geometry-and-trained-model-data" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mkdir<span class="w"> </span>-p<span class="w"> </span>deeponet_results
+<span class="o">!</span>wget<span class="w"> </span>https://github.com/DesignSafe-Training/deeponet/raw/refs/heads/main/model_params_best.pkl<span class="w"> </span>-P<span class="w"> </span>deeponet_results/
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget<span class="w"> </span>https://github.com/DesignSafe-Training/deeponet/raw/refs/heads/main/cantilever_beam_deflection.mat
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="kn">import</span> <span class="nn">numpy.random</span> <span class="k">as</span> <span class="nn">npr</span>
@@ -449,7 +496,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cpu
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>gpu
 </pre></div>
 </div>
 </div>
@@ -457,14 +504,17 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">save</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">resultdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">&#39;deeponet_results&#39;</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">save</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-    <span class="n">resultdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">&#39;deeponet_results&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">resultdir</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">resultdir</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="data">
+<h3>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the data</span>
@@ -513,6 +563,9 @@ Shape of y-displacement matrix corresponding to the testing loads: (200, 1314)
 </div>
 </div>
 </div>
+</section>
+<section id="define-a-neural-network">
+<h3>Define a Neural Network<a class="headerlink" href="#define-a-neural-network" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># network parameters.</span>
@@ -693,6 +746,9 @@ Shape of y-displacement matrix corresponding to the testing loads: (200, 1314)
 </div>
 </div>
 </div>
+</section>
+<section id="training">
+<h3>Training<a class="headerlink" href="#training" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inputs_train</span><span class="p">)</span>
@@ -750,17 +806,20 @@ Shape of y-displacement matrix corresponding to the testing loads: (200, 1314)
             <span class="s1">&#39;Best Test&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">best_test_mse</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
             <span class="s1">&#39;Time&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">finish</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">s&#39;</span>
         <span class="p">})</span>
-        <span class="c1"># Store metrics for plotting</span>
-        <span class="n">iteration_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">iteration</span><span class="p">)</span>
-        <span class="n">loss_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_loss</span><span class="p">)</span>
-        <span class="n">test_loss_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_mse</span><span class="p">)</span>
+
+    <span class="c1"># Store metrics for plotting</span>
+    <span class="n">iteration_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">iteration</span><span class="p">)</span>
+    <span class="n">loss_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">objective</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">branch_inputs</span><span class="p">,</span> <span class="n">trunk_inputs</span><span class="p">,</span> <span class="n">target_values_x</span><span class="p">,</span> <span class="n">target_values_y</span><span class="p">))</span>
+    <span class="n">test_loss_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_mse</span><span class="p">)</span>
+
 <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
     <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resultdir</span><span class="p">,</span> <span class="s1">&#39;iteration_list.npy&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">iteration_list</span><span class="p">))</span>
     <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resultdir</span><span class="p">,</span> <span class="s1">&#39;loss_list.npy&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">loss_list</span><span class="p">))</span>
     <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resultdir</span><span class="p">,</span> <span class="s1">&#39;test_loss_list.npy&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">test_loss_list</span><span class="p">))</span>
+
 <span class="c1"># Plotting code remains the same</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iteration_list</span><span class="p">,</span> <span class="n">loss_list</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Training loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iteration_list</span><span class="p">,</span> <span class="n">loss_list</span><span class="p">,</span> <span class="s1">&#39;-g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Training loss&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iteration_list</span><span class="p">,</span> <span class="n">test_loss_list</span><span class="p">,</span> <span class="s1">&#39;-b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test loss&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Iterations&#39;</span><span class="p">)</span>
@@ -780,254 +839,261 @@ Shape of y-displacement matrix corresponding to the testing loads: (200, 1314)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>------------- START TRAINING -------------
 Saved initial model at iteration 0
 New best model saved at iteration 0 with test MSE: 0.0390862
-Iteration:   0, Train loss: 0.0390862, Test loss: 0.0390862, Best test loss: 0.0390862, Time: 0.75
-New best model saved at iteration 1000 with test MSE: 0.0027267
-Iteration: 1000, Train loss: 0.0027267, Test loss: 0.0027267, Best test loss: 0.0027267, Time: 16.15
-New best model saved at iteration 2000 with test MSE: 0.0007219
-Iteration: 2000, Train loss: 0.0007219, Test loss: 0.0007219, Best test loss: 0.0007219, Time: 31.29
-New best model saved at iteration 3000 with test MSE: 0.0003320
-Iteration: 3000, Train loss: 0.0003320, Test loss: 0.0003320, Best test loss: 0.0003320, Time: 46.27
-New best model saved at iteration 4000 with test MSE: 0.0002126
-Iteration: 4000, Train loss: 0.0002126, Test loss: 0.0002126, Best test loss: 0.0002126, Time: 61.32
-New best model saved at iteration 5000 with test MSE: 0.0001756
-Iteration: 5000, Train loss: 0.0001756, Test loss: 0.0001756, Best test loss: 0.0001756, Time: 76.26
-New best model saved at iteration 6000 with test MSE: 0.0000898
-Iteration: 6000, Train loss: 0.0000898, Test loss: 0.0000898, Best test loss: 0.0000898, Time: 91.23
-New best model saved at iteration 7000 with test MSE: 0.0000824
-Iteration: 7000, Train loss: 0.0000824, Test loss: 0.0000824, Best test loss: 0.0000824, Time: 106.09
-New best model saved at iteration 8000 with test MSE: 0.0000789
-Iteration: 8000, Train loss: 0.0000789, Test loss: 0.0000789, Best test loss: 0.0000789, Time: 121.07
-New best model saved at iteration 9000 with test MSE: 0.0000648
-Iteration: 9000, Train loss: 0.0000648, Test loss: 0.0000648, Best test loss: 0.0000648, Time: 136.07
-New best model saved at iteration 10000 with test MSE: 0.0000547
-Iteration: 10000, Train loss: 0.0000547, Test loss: 0.0000547, Best test loss: 0.0000547, Time: 151.02
-New best model saved at iteration 11000 with test MSE: 0.0000380
-Iteration: 11000, Train loss: 0.0000380, Test loss: 0.0000380, Best test loss: 0.0000380, Time: 165.98
-New best model saved at iteration 12000 with test MSE: 0.0000294
-Iteration: 12000, Train loss: 0.0000294, Test loss: 0.0000294, Best test loss: 0.0000294, Time: 181.07
-New best model saved at iteration 13000 with test MSE: 0.0000254
-Iteration: 13000, Train loss: 0.0000254, Test loss: 0.0000254, Best test loss: 0.0000254, Time: 196.13
-New best model saved at iteration 14000 with test MSE: 0.0000235
-Iteration: 14000, Train loss: 0.0000235, Test loss: 0.0000235, Best test loss: 0.0000235, Time: 211.16
-New best model saved at iteration 15000 with test MSE: 0.0000187
-Iteration: 15000, Train loss: 0.0000187, Test loss: 0.0000187, Best test loss: 0.0000187, Time: 226.22
-New best model saved at iteration 16000 with test MSE: 0.0000180
-Iteration: 16000, Train loss: 0.0000180, Test loss: 0.0000180, Best test loss: 0.0000180, Time: 241.15
-Iteration: 17000, Train loss: 0.0000199, Test loss: 0.0000199, Best test loss: 0.0000180, Time: 256.14
-New best model saved at iteration 18000 with test MSE: 0.0000160
-Iteration: 18000, Train loss: 0.0000160, Test loss: 0.0000160, Best test loss: 0.0000160, Time: 271.03
-New best model saved at iteration 19000 with test MSE: 0.0000101
-Iteration: 19000, Train loss: 0.0000101, Test loss: 0.0000101, Best test loss: 0.0000101, Time: 285.94
-New best model saved at iteration 20000 with test MSE: 0.0000090
-Iteration: 20000, Train loss: 0.0000090, Test loss: 0.0000090, Best test loss: 0.0000090, Time: 300.97
-Iteration: 21000, Train loss: 0.0000146, Test loss: 0.0000146, Best test loss: 0.0000090, Time: 316.05
-New best model saved at iteration 22000 with test MSE: 0.0000086
-Iteration: 22000, Train loss: 0.0000086, Test loss: 0.0000086, Best test loss: 0.0000086, Time: 331.07
-New best model saved at iteration 23000 with test MSE: 0.0000071
-Iteration: 23000, Train loss: 0.0000071, Test loss: 0.0000071, Best test loss: 0.0000071, Time: 346.04
-New best model saved at iteration 24000 with test MSE: 0.0000050
-Iteration: 24000, Train loss: 0.0000050, Test loss: 0.0000050, Best test loss: 0.0000050, Time: 361.02
-Iteration: 25000, Train loss: 0.0000156, Test loss: 0.0000156, Best test loss: 0.0000050, Time: 376.11
-New best model saved at iteration 26000 with test MSE: 0.0000033
-Iteration: 26000, Train loss: 0.0000033, Test loss: 0.0000033, Best test loss: 0.0000033, Time: 390.94
-Iteration: 27000, Train loss: 0.0000033, Test loss: 0.0000033, Best test loss: 0.0000033, Time: 405.64
-Iteration: 28000, Train loss: 0.0000034, Test loss: 0.0000034, Best test loss: 0.0000033, Time: 420.32
-Iteration: 29000, Train loss: 0.0000034, Test loss: 0.0000034, Best test loss: 0.0000033, Time: 435.05
-New best model saved at iteration 30000 with test MSE: 0.0000025
-Iteration: 30000, Train loss: 0.0000025, Test loss: 0.0000025, Best test loss: 0.0000025, Time: 450.04
-Iteration: 31000, Train loss: 0.0000030, Test loss: 0.0000030, Best test loss: 0.0000025, Time: 465.04
-Iteration: 32000, Train loss: 0.0000048, Test loss: 0.0000048, Best test loss: 0.0000025, Time: 480.08
-Iteration: 33000, Train loss: 0.0000037, Test loss: 0.0000037, Best test loss: 0.0000025, Time: 495.28
-Iteration: 34000, Train loss: 0.0000053, Test loss: 0.0000053, Best test loss: 0.0000025, Time: 509.98
-Iteration: 35000, Train loss: 0.0000077, Test loss: 0.0000077, Best test loss: 0.0000025, Time: 524.81
-Iteration: 36000, Train loss: 0.0000060, Test loss: 0.0000060, Best test loss: 0.0000025, Time: 539.68
-Iteration: 37000, Train loss: 0.0000035, Test loss: 0.0000035, Best test loss: 0.0000025, Time: 554.77
-New best model saved at iteration 38000 with test MSE: 0.0000020
-Iteration: 38000, Train loss: 0.0000020, Test loss: 0.0000020, Best test loss: 0.0000020, Time: 569.77
-Iteration: 39000, Train loss: 0.0000091, Test loss: 0.0000091, Best test loss: 0.0000020, Time: 584.89
-Iteration: 40000, Train loss: 0.0000053, Test loss: 0.0000053, Best test loss: 0.0000020, Time: 600.18
-Iteration: 41000, Train loss: 0.0000068, Test loss: 0.0000068, Best test loss: 0.0000020, Time: 615.74
-Iteration: 42000, Train loss: 0.0000040, Test loss: 0.0000040, Best test loss: 0.0000020, Time: 631.56
-Iteration: 43000, Train loss: 0.0000021, Test loss: 0.0000021, Best test loss: 0.0000020, Time: 647.32
-New best model saved at iteration 44000 with test MSE: 0.0000015
-Iteration: 44000, Train loss: 0.0000015, Test loss: 0.0000015, Best test loss: 0.0000015, Time: 663.20
-Iteration: 45000, Train loss: 0.0000018, Test loss: 0.0000018, Best test loss: 0.0000015, Time: 678.86
-Iteration: 46000, Train loss: 0.0000020, Test loss: 0.0000020, Best test loss: 0.0000015, Time: 694.27
-Iteration: 47000, Train loss: 0.0000064, Test loss: 0.0000064, Best test loss: 0.0000015, Time: 709.98
-Iteration: 48000, Train loss: 0.0000015, Test loss: 0.0000015, Best test loss: 0.0000015, Time: 725.11
-New best model saved at iteration 49000 with test MSE: 0.0000011
-Iteration: 49000, Train loss: 0.0000011, Test loss: 0.0000011, Best test loss: 0.0000011, Time: 740.19
-New best model saved at iteration 50000 with test MSE: 0.0000008
-Iteration: 50000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000008, Time: 755.27
-Iteration: 51000, Train loss: 0.0000012, Test loss: 0.0000012, Best test loss: 0.0000008, Time: 770.42
-Iteration: 52000, Train loss: 0.0000019, Test loss: 0.0000019, Best test loss: 0.0000008, Time: 785.53
-Iteration: 53000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000008, Time: 800.65
-Iteration: 54000, Train loss: 0.0000021, Test loss: 0.0000021, Best test loss: 0.0000008, Time: 815.93
-New best model saved at iteration 55000 with test MSE: 0.0000007
-Iteration: 55000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000007, Time: 830.97
-Iteration: 56000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000007, Time: 845.90
-Iteration: 57000, Train loss: 0.0000017, Test loss: 0.0000017, Best test loss: 0.0000007, Time: 860.79
-Iteration: 58000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000007, Time: 875.40
-Iteration: 59000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000007, Time: 890.27
-Iteration: 60000, Train loss: 0.0000011, Test loss: 0.0000011, Best test loss: 0.0000007, Time: 905.07
-Iteration: 61000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000007, Time: 920.10
-Iteration: 62000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000007, Time: 935.19
-Iteration: 63000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000007, Time: 950.06
-Iteration: 64000, Train loss: 0.0000034, Test loss: 0.0000034, Best test loss: 0.0000007, Time: 965.03
-Iteration: 65000, Train loss: 0.0000012, Test loss: 0.0000012, Best test loss: 0.0000007, Time: 979.87
-Iteration: 66000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000007, Time: 995.00
-Iteration: 67000, Train loss: 0.0000017, Test loss: 0.0000017, Best test loss: 0.0000007, Time: 1010.05
-Iteration: 68000, Train loss: 0.0000012, Test loss: 0.0000012, Best test loss: 0.0000007, Time: 1025.18
-Iteration: 69000, Train loss: 0.0000030, Test loss: 0.0000030, Best test loss: 0.0000007, Time: 1040.34
-Iteration: 70000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000007, Time: 1055.43
-Iteration: 71000, Train loss: 0.0000052, Test loss: 0.0000052, Best test loss: 0.0000007, Time: 1070.26
-New best model saved at iteration 72000 with test MSE: 0.0000005
-Iteration: 72000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000005, Time: 1085.39
-Iteration: 73000, Train loss: 0.0000025, Test loss: 0.0000025, Best test loss: 0.0000005, Time: 1100.51
-Iteration: 74000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000005, Time: 1115.72
-Iteration: 75000, Train loss: 0.0000016, Test loss: 0.0000016, Best test loss: 0.0000005, Time: 1130.88
-Iteration: 76000, Train loss: 0.0000043, Test loss: 0.0000043, Best test loss: 0.0000005, Time: 1146.01
-New best model saved at iteration 77000 with test MSE: 0.0000005
-Iteration: 77000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000005, Time: 1161.19
-Iteration: 78000, Train loss: 0.0000013, Test loss: 0.0000013, Best test loss: 0.0000005, Time: 1176.40
-Iteration: 79000, Train loss: 0.0000027, Test loss: 0.0000027, Best test loss: 0.0000005, Time: 1191.48
-Iteration: 80000, Train loss: 0.0000014, Test loss: 0.0000014, Best test loss: 0.0000005, Time: 1206.57
-Iteration: 81000, Train loss: 0.0000048, Test loss: 0.0000048, Best test loss: 0.0000005, Time: 1221.63
-Iteration: 82000, Train loss: 0.0000017, Test loss: 0.0000017, Best test loss: 0.0000005, Time: 1236.51
-Iteration: 83000, Train loss: 0.0000048, Test loss: 0.0000048, Best test loss: 0.0000005, Time: 1250.98
-Iteration: 84000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000005, Time: 2208.33
-Iteration: 85000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000005, Time: 2223.15
-Iteration: 86000, Train loss: 0.0000018, Test loss: 0.0000018, Best test loss: 0.0000005, Time: 2237.61
-Iteration: 87000, Train loss: 0.0000014, Test loss: 0.0000014, Best test loss: 0.0000005, Time: 2252.01
-Iteration: 88000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000005, Time: 2266.37
-Iteration: 89000, Train loss: 0.0000026, Test loss: 0.0000026, Best test loss: 0.0000005, Time: 2280.83
-Iteration: 90000, Train loss: 0.0000013, Test loss: 0.0000013, Best test loss: 0.0000005, Time: 2295.08
-Iteration: 91000, Train loss: 0.0000011, Test loss: 0.0000011, Best test loss: 0.0000005, Time: 2309.25
-Iteration: 92000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000005, Time: 3294.03
-Iteration: 93000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000005, Time: 3308.65
-Iteration: 94000, Train loss: 0.0000015, Test loss: 0.0000015, Best test loss: 0.0000005, Time: 3323.21
-Iteration: 95000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000005, Time: 3338.10
-Iteration: 96000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000005, Time: 3353.10
-Iteration: 97000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000005, Time: 3367.91
-Iteration: 98000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000005, Time: 3382.72
-Iteration: 99000, Train loss: 0.0000024, Test loss: 0.0000024, Best test loss: 0.0000005, Time: 3397.49
-Iteration: 100000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000005, Time: 3412.26
-Iteration: 101000, Train loss: 0.0000020, Test loss: 0.0000020, Best test loss: 0.0000005, Time: 3427.09
-Iteration: 102000, Train loss: 0.0000012, Test loss: 0.0000012, Best test loss: 0.0000005, Time: 3442.05
-New best model saved at iteration 103000 with test MSE: 0.0000004
-Iteration: 103000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000004, Time: 3456.85
-Iteration: 104000, Train loss: 0.0000011, Test loss: 0.0000011, Best test loss: 0.0000004, Time: 4397.97
-Iteration: 105000, Train loss: 0.0000027, Test loss: 0.0000027, Best test loss: 0.0000004, Time: 4412.78
-Iteration: 106000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000004, Time: 4427.74
-Iteration: 107000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000004, Time: 4442.59
-Iteration: 108000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000004, Time: 4457.49
-Iteration: 109000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000004, Time: 5437.45
-Iteration: 110000, Train loss: 0.0000029, Test loss: 0.0000029, Best test loss: 0.0000004, Time: 5452.47
-Iteration: 111000, Train loss: 0.0000014, Test loss: 0.0000014, Best test loss: 0.0000004, Time: 5467.20
-New best model saved at iteration 112000 with test MSE: 0.0000003
-Iteration: 112000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000003, Time: 5481.92
-Iteration: 113000, Train loss: 0.0000011, Test loss: 0.0000011, Best test loss: 0.0000003, Time: 5496.58
-Iteration: 114000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000003, Time: 5511.22
-Iteration: 115000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000003, Time: 5525.83
-Iteration: 116000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000003, Time: 5540.82
-Iteration: 117000, Train loss: 0.0000011, Test loss: 0.0000011, Best test loss: 0.0000003, Time: 5555.77
-Iteration: 118000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000003, Time: 5570.73
+Iteration:   0, Train loss: 0.0390862, Test loss: 0.0390862, Best test loss: 0.0390862, Time: 2.12
+New best model saved at iteration 1000 with test MSE: 0.0027250
+Iteration: 1000, Train loss: 0.0027250, Test loss: 0.0027250, Best test loss: 0.0027250, Time: 9.67
+New best model saved at iteration 2000 with test MSE: 0.0007205
+Iteration: 2000, Train loss: 0.0007205, Test loss: 0.0007205, Best test loss: 0.0007205, Time: 16.55
+New best model saved at iteration 3000 with test MSE: 0.0003108
+Iteration: 3000, Train loss: 0.0003108, Test loss: 0.0003108, Best test loss: 0.0003108, Time: 23.31
+New best model saved at iteration 4000 with test MSE: 0.0002083
+Iteration: 4000, Train loss: 0.0002083, Test loss: 0.0002083, Best test loss: 0.0002083, Time: 30.40
+New best model saved at iteration 5000 with test MSE: 0.0001633
+Iteration: 5000, Train loss: 0.0001633, Test loss: 0.0001633, Best test loss: 0.0001633, Time: 37.24
+New best model saved at iteration 6000 with test MSE: 0.0001012
+Iteration: 6000, Train loss: 0.0001012, Test loss: 0.0001012, Best test loss: 0.0001012, Time: 44.31
+New best model saved at iteration 7000 with test MSE: 0.0000861
+Iteration: 7000, Train loss: 0.0000861, Test loss: 0.0000861, Best test loss: 0.0000861, Time: 51.01
+New best model saved at iteration 8000 with test MSE: 0.0000759
+Iteration: 8000, Train loss: 0.0000759, Test loss: 0.0000759, Best test loss: 0.0000759, Time: 57.87
+New best model saved at iteration 9000 with test MSE: 0.0000620
+Iteration: 9000, Train loss: 0.0000620, Test loss: 0.0000620, Best test loss: 0.0000620, Time: 64.67
+New best model saved at iteration 10000 with test MSE: 0.0000543
+Iteration: 10000, Train loss: 0.0000543, Test loss: 0.0000543, Best test loss: 0.0000543, Time: 71.39
+New best model saved at iteration 11000 with test MSE: 0.0000367
+Iteration: 11000, Train loss: 0.0000367, Test loss: 0.0000367, Best test loss: 0.0000367, Time: 78.15
+New best model saved at iteration 12000 with test MSE: 0.0000302
+Iteration: 12000, Train loss: 0.0000302, Test loss: 0.0000302, Best test loss: 0.0000302, Time: 84.93
+Iteration: 13000, Train loss: 0.0000326, Test loss: 0.0000326, Best test loss: 0.0000302, Time: 92.48
+New best model saved at iteration 14000 with test MSE: 0.0000214
+Iteration: 14000, Train loss: 0.0000214, Test loss: 0.0000214, Best test loss: 0.0000214, Time: 99.62
+Iteration: 15000, Train loss: 0.0000313, Test loss: 0.0000313, Best test loss: 0.0000214, Time: 106.46
+New best model saved at iteration 16000 with test MSE: 0.0000163
+Iteration: 16000, Train loss: 0.0000163, Test loss: 0.0000163, Best test loss: 0.0000163, Time: 113.31
+New best model saved at iteration 17000 with test MSE: 0.0000151
+Iteration: 17000, Train loss: 0.0000151, Test loss: 0.0000151, Best test loss: 0.0000151, Time: 120.27
+New best model saved at iteration 18000 with test MSE: 0.0000144
+Iteration: 18000, Train loss: 0.0000144, Test loss: 0.0000144, Best test loss: 0.0000144, Time: 127.17
+Iteration: 19000, Train loss: 0.0000162, Test loss: 0.0000162, Best test loss: 0.0000144, Time: 133.93
+New best model saved at iteration 20000 with test MSE: 0.0000124
+Iteration: 20000, Train loss: 0.0000124, Test loss: 0.0000124, Best test loss: 0.0000124, Time: 140.86
+New best model saved at iteration 21000 with test MSE: 0.0000078
+Iteration: 21000, Train loss: 0.0000078, Test loss: 0.0000078, Best test loss: 0.0000078, Time: 148.12
+Iteration: 22000, Train loss: 0.0000110, Test loss: 0.0000110, Best test loss: 0.0000078, Time: 155.40
+New best model saved at iteration 23000 with test MSE: 0.0000050
+Iteration: 23000, Train loss: 0.0000050, Test loss: 0.0000050, Best test loss: 0.0000050, Time: 162.64
+New best model saved at iteration 24000 with test MSE: 0.0000035
+Iteration: 24000, Train loss: 0.0000035, Test loss: 0.0000035, Best test loss: 0.0000035, Time: 169.85
+Iteration: 25000, Train loss: 0.0000092, Test loss: 0.0000092, Best test loss: 0.0000035, Time: 177.03
+Iteration: 26000, Train loss: 0.0000044, Test loss: 0.0000044, Best test loss: 0.0000035, Time: 184.34
+New best model saved at iteration 27000 with test MSE: 0.0000031
+Iteration: 27000, Train loss: 0.0000031, Test loss: 0.0000031, Best test loss: 0.0000031, Time: 191.29
+New best model saved at iteration 28000 with test MSE: 0.0000027
+Iteration: 28000, Train loss: 0.0000027, Test loss: 0.0000027, Best test loss: 0.0000027, Time: 198.01
+Iteration: 29000, Train loss: 0.0000042, Test loss: 0.0000042, Best test loss: 0.0000027, Time: 205.32
+Iteration: 30000, Train loss: 0.0000027, Test loss: 0.0000027, Best test loss: 0.0000027, Time: 212.64
+New best model saved at iteration 31000 with test MSE: 0.0000025
+Iteration: 31000, Train loss: 0.0000025, Test loss: 0.0000025, Best test loss: 0.0000025, Time: 219.98
+Iteration: 32000, Train loss: 0.0000038, Test loss: 0.0000038, Best test loss: 0.0000025, Time: 227.34
+Iteration: 33000, Train loss: 0.0000029, Test loss: 0.0000029, Best test loss: 0.0000025, Time: 234.79
+Iteration: 34000, Train loss: 0.0000025, Test loss: 0.0000025, Best test loss: 0.0000025, Time: 242.01
+New best model saved at iteration 35000 with test MSE: 0.0000024
+Iteration: 35000, Train loss: 0.0000024, Test loss: 0.0000024, Best test loss: 0.0000024, Time: 249.14
+New best model saved at iteration 36000 with test MSE: 0.0000021
+Iteration: 36000, Train loss: 0.0000021, Test loss: 0.0000021, Best test loss: 0.0000021, Time: 256.77
+New best model saved at iteration 37000 with test MSE: 0.0000021
+Iteration: 37000, Train loss: 0.0000021, Test loss: 0.0000021, Best test loss: 0.0000021, Time: 264.23
+Iteration: 38000, Train loss: 0.0000030, Test loss: 0.0000030, Best test loss: 0.0000021, Time: 271.68
+Iteration: 39000, Train loss: 0.0000024, Test loss: 0.0000024, Best test loss: 0.0000021, Time: 279.22
+Iteration: 40000, Train loss: 0.0000031, Test loss: 0.0000031, Best test loss: 0.0000021, Time: 286.68
+Iteration: 41000, Train loss: 0.0000024, Test loss: 0.0000024, Best test loss: 0.0000021, Time: 294.03
+New best model saved at iteration 42000 with test MSE: 0.0000016
+Iteration: 42000, Train loss: 0.0000016, Test loss: 0.0000016, Best test loss: 0.0000016, Time: 301.45
+Iteration: 43000, Train loss: 0.0000019, Test loss: 0.0000019, Best test loss: 0.0000016, Time: 308.75
+New best model saved at iteration 44000 with test MSE: 0.0000013
+Iteration: 44000, Train loss: 0.0000013, Test loss: 0.0000013, Best test loss: 0.0000013, Time: 316.28
+Iteration: 45000, Train loss: 0.0000016, Test loss: 0.0000016, Best test loss: 0.0000013, Time: 323.76
+Iteration: 46000, Train loss: 0.0000020, Test loss: 0.0000020, Best test loss: 0.0000013, Time: 330.61
+Iteration: 47000, Train loss: 0.0000020, Test loss: 0.0000020, Best test loss: 0.0000013, Time: 337.92
+New best model saved at iteration 48000 with test MSE: 0.0000009
+Iteration: 48000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000009, Time: 345.38
+Iteration: 49000, Train loss: 0.0000034, Test loss: 0.0000034, Best test loss: 0.0000009, Time: 352.44
+Iteration: 50000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000009, Time: 359.45
+Iteration: 51000, Train loss: 0.0000067, Test loss: 0.0000067, Best test loss: 0.0000009, Time: 366.35
+Iteration: 52000, Train loss: 0.0000015, Test loss: 0.0000015, Best test loss: 0.0000009, Time: 373.58
+New best model saved at iteration 53000 with test MSE: 0.0000008
+Iteration: 53000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000008, Time: 381.21
+New best model saved at iteration 54000 with test MSE: 0.0000008
+Iteration: 54000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000008, Time: 388.84
+Iteration: 55000, Train loss: 0.0000018, Test loss: 0.0000018, Best test loss: 0.0000008, Time: 396.19
+Iteration: 56000, Train loss: 0.0000014, Test loss: 0.0000014, Best test loss: 0.0000008, Time: 403.56
+New best model saved at iteration 57000 with test MSE: 0.0000007
+Iteration: 57000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000007, Time: 410.76
+Iteration: 58000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000007, Time: 417.96
+Iteration: 59000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000007, Time: 425.37
+Iteration: 60000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000007, Time: 432.78
+Iteration: 61000, Train loss: 0.0000021, Test loss: 0.0000021, Best test loss: 0.0000007, Time: 440.09
+New best model saved at iteration 62000 with test MSE: 0.0000007
+Iteration: 62000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000007, Time: 447.23
+Iteration: 63000, Train loss: 0.0000012, Test loss: 0.0000012, Best test loss: 0.0000007, Time: 454.53
+New best model saved at iteration 64000 with test MSE: 0.0000006
+Iteration: 64000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000006, Time: 461.73
+Iteration: 65000, Train loss: 0.0000016, Test loss: 0.0000016, Best test loss: 0.0000006, Time: 468.78
+Iteration: 66000, Train loss: 0.0000015, Test loss: 0.0000015, Best test loss: 0.0000006, Time: 475.82
+Iteration: 67000, Train loss: 0.0000013, Test loss: 0.0000013, Best test loss: 0.0000006, Time: 482.93
+Iteration: 68000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000006, Time: 490.06
+New best model saved at iteration 69000 with test MSE: 0.0000006
+Iteration: 69000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000006, Time: 497.41
+Iteration: 70000, Train loss: 0.0000034, Test loss: 0.0000034, Best test loss: 0.0000006, Time: 504.64
+New best model saved at iteration 71000 with test MSE: 0.0000005
+Iteration: 71000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000005, Time: 511.74
+Iteration: 72000, Train loss: 0.0000100, Test loss: 0.0000100, Best test loss: 0.0000005, Time: 518.82
+Iteration: 73000, Train loss: 0.0000016, Test loss: 0.0000016, Best test loss: 0.0000005, Time: 525.91
+Iteration: 74000, Train loss: 0.0000021, Test loss: 0.0000021, Best test loss: 0.0000005, Time: 532.85
+Iteration: 75000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000005, Time: 540.19
+New best model saved at iteration 76000 with test MSE: 0.0000005
+Iteration: 76000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000005, Time: 547.46
+Iteration: 77000, Train loss: 0.0000015, Test loss: 0.0000015, Best test loss: 0.0000005, Time: 554.50
+Iteration: 78000, Train loss: 0.0000012, Test loss: 0.0000012, Best test loss: 0.0000005, Time: 561.47
+Iteration: 79000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000005, Time: 568.59
+Iteration: 80000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000005, Time: 575.89
+Iteration: 81000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000005, Time: 582.98
+New best model saved at iteration 82000 with test MSE: 0.0000005
+Iteration: 82000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000005, Time: 590.17
+Iteration: 83000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000005, Time: 597.27
+Iteration: 84000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000005, Time: 604.56
+Iteration: 85000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000005, Time: 611.81
+Iteration: 86000, Train loss: 0.0000015, Test loss: 0.0000015, Best test loss: 0.0000005, Time: 619.19
+Iteration: 87000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000005, Time: 626.27
+Iteration: 88000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000005, Time: 633.61
+Iteration: 89000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000005, Time: 640.84
+Iteration: 90000, Train loss: 0.0000021, Test loss: 0.0000021, Best test loss: 0.0000005, Time: 647.90
+Iteration: 91000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000005, Time: 654.91
+Iteration: 92000, Train loss: 0.0000011, Test loss: 0.0000011, Best test loss: 0.0000005, Time: 662.04
+New best model saved at iteration 93000 with test MSE: 0.0000004
+Iteration: 93000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000004, Time: 669.22
+Iteration: 94000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000004, Time: 676.37
+Iteration: 95000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000004, Time: 683.59
+Iteration: 96000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000004, Time: 690.70
+Iteration: 97000, Train loss: 0.0000017, Test loss: 0.0000017, Best test loss: 0.0000004, Time: 697.76
+Iteration: 98000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000004, Time: 704.75
+New best model saved at iteration 99000 with test MSE: 0.0000004
+Iteration: 99000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000004, Time: 711.63
+Iteration: 100000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000004, Time: 723.55
+Iteration: 101000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000004, Time: 730.89
+Iteration: 102000, Train loss: 0.0000018, Test loss: 0.0000018, Best test loss: 0.0000004, Time: 738.28
+Iteration: 103000, Train loss: 0.0000030, Test loss: 0.0000030, Best test loss: 0.0000004, Time: 745.61
+Iteration: 104000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000004, Time: 752.90
+New best model saved at iteration 105000 with test MSE: 0.0000004
+Iteration: 105000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000004, Time: 760.06
+Iteration: 106000, Train loss: 0.0000099, Test loss: 0.0000099, Best test loss: 0.0000004, Time: 767.18
+Iteration: 107000, Train loss: 0.0000022, Test loss: 0.0000022, Best test loss: 0.0000004, Time: 774.22
+New best model saved at iteration 108000 with test MSE: 0.0000004
+Iteration: 108000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000004, Time: 781.18
+Iteration: 109000, Train loss: 0.0000014, Test loss: 0.0000014, Best test loss: 0.0000004, Time: 788.04
+Iteration: 110000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000004, Time: 794.66
+New best model saved at iteration 111000 with test MSE: 0.0000003
+Iteration: 111000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000003, Time: 801.76
+Iteration: 112000, Train loss: 0.0000033, Test loss: 0.0000033, Best test loss: 0.0000003, Time: 808.85
+Iteration: 113000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000003, Time: 816.08
+Iteration: 114000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000003, Time: 823.08
+Iteration: 115000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000003, Time: 830.20
+New best model saved at iteration 116000 with test MSE: 0.0000003
+Iteration: 116000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000003, Time: 837.57
+Iteration: 117000, Train loss: 0.0000020, Test loss: 0.0000020, Best test loss: 0.0000003, Time: 844.85
+Iteration: 118000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000003, Time: 851.86
 New best model saved at iteration 119000 with test MSE: 0.0000002
-Iteration: 119000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 5585.76
-Iteration: 120000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000002, Time: 5600.70
-Iteration: 121000, Train loss: 0.0000024, Test loss: 0.0000024, Best test loss: 0.0000002, Time: 6521.97
-New best model saved at iteration 122000 with test MSE: 0.0000002
-Iteration: 122000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 6536.86
-Iteration: 123000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 6551.75
-Iteration: 124000, Train loss: 0.0000013, Test loss: 0.0000013, Best test loss: 0.0000002, Time: 7502.82
-Iteration: 125000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000002, Time: 7517.55
-Iteration: 126000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000002, Time: 7532.44
-Iteration: 127000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000002, Time: 7547.30
-New best model saved at iteration 128000 with test MSE: 0.0000002
-Iteration: 128000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 7562.23
-Iteration: 129000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000002, Time: 7577.19
-Iteration: 130000, Train loss: 0.0000016, Test loss: 0.0000016, Best test loss: 0.0000002, Time: 7592.21
-Iteration: 131000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000002, Time: 7607.27
-Iteration: 132000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000002, Time: 7622.17
-Iteration: 133000, Train loss: 0.0000039, Test loss: 0.0000039, Best test loss: 0.0000002, Time: 7637.19
-Iteration: 134000, Train loss: 0.0000019, Test loss: 0.0000019, Best test loss: 0.0000002, Time: 7652.25
-Iteration: 135000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000002, Time: 7667.24
-Iteration: 136000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 7682.22
-New best model saved at iteration 137000 with test MSE: 0.0000001
-Iteration: 137000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 8613.46
-Iteration: 138000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000001, Time: 8628.46
-Iteration: 139000, Train loss: 0.0000053, Test loss: 0.0000053, Best test loss: 0.0000001, Time: 8643.39
-Iteration: 140000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000001, Time: 9652.57
-Iteration: 141000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 9667.32
-Iteration: 142000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 9682.19
-New best model saved at iteration 143000 with test MSE: 0.0000001
-Iteration: 143000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 9697.15
-Iteration: 144000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000001, Time: 9711.97
-Iteration: 145000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 9726.91
-Iteration: 146000, Train loss: 0.0000017, Test loss: 0.0000017, Best test loss: 0.0000001, Time: 9741.85
-Iteration: 147000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000001, Time: 9756.73
-Iteration: 148000, Train loss: 0.0000116, Test loss: 0.0000116, Best test loss: 0.0000001, Time: 9771.50
-Iteration: 149000, Train loss: 0.0000021, Test loss: 0.0000021, Best test loss: 0.0000001, Time: 9786.35
-Iteration: 150000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000001, Time: 9801.20
-Iteration: 151000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000001, Time: 9816.05
-Iteration: 152000, Train loss: 0.0000055, Test loss: 0.0000055, Best test loss: 0.0000001, Time: 10796.14
-Iteration: 153000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000001, Time: 10810.81
-Iteration: 154000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000001, Time: 10825.66
-Iteration: 155000, Train loss: 0.0000089, Test loss: 0.0000089, Best test loss: 0.0000001, Time: 11837.00
-Iteration: 156000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000001, Time: 11851.85
-Iteration: 157000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 11866.51
-Iteration: 158000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000001, Time: 11880.81
-Iteration: 159000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 11894.95
-Iteration: 160000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000001, Time: 11909.51
-Iteration: 161000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000001, Time: 11923.88
-Iteration: 162000, Train loss: 0.0000012, Test loss: 0.0000012, Best test loss: 0.0000001, Time: 11938.10
-Iteration: 163000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 11952.50
-Iteration: 164000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000001, Time: 11966.84
-Iteration: 165000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000001, Time: 11981.20
-Iteration: 166000, Train loss: 0.0000028, Test loss: 0.0000028, Best test loss: 0.0000001, Time: 11995.64
-Iteration: 167000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 12010.02
-Iteration: 168000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 12024.34
-New best model saved at iteration 169000 with test MSE: 0.0000001
-Iteration: 169000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 12038.73
-Iteration: 170000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 12053.18
-Iteration: 171000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 12067.36
-Iteration: 172000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000001, Time: 12081.82
-Iteration: 173000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 12096.35
-New best model saved at iteration 174000 with test MSE: 0.0000001
-Iteration: 174000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 13082.85
-Iteration: 175000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000001, Time: 13097.57
-Iteration: 176000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000001, Time: 13112.16
-Iteration: 177000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 13126.89
-Iteration: 178000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000001, Time: 14065.82
-Iteration: 179000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 14080.27
-New best model saved at iteration 180000 with test MSE: 0.0000001
-Iteration: 180000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 14094.88
-Iteration: 181000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 14109.49
-Iteration: 182000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000001, Time: 14124.18
-Iteration: 183000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000001, Time: 14138.90
-Iteration: 184000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000001, Time: 14153.71
-Iteration: 185000, Train loss: 0.0000023, Test loss: 0.0000023, Best test loss: 0.0000001, Time: 14168.34
-Iteration: 186000, Train loss: 0.0000011, Test loss: 0.0000011, Best test loss: 0.0000001, Time: 14183.08
-Iteration: 187000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000001, Time: 14197.87
-Iteration: 188000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 14212.49
+Iteration: 119000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 858.83
+Iteration: 120000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000002, Time: 865.53
+Iteration: 121000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000002, Time: 872.37
+Iteration: 122000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000002, Time: 879.63
+Iteration: 123000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000002, Time: 886.48
+New best model saved at iteration 124000 with test MSE: 0.0000002
+Iteration: 124000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 893.42
+Iteration: 125000, Train loss: 0.0000013, Test loss: 0.0000013, Best test loss: 0.0000002, Time: 900.97
+Iteration: 126000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000002, Time: 908.32
+Iteration: 127000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000002, Time: 915.65
+Iteration: 128000, Train loss: 0.0000011, Test loss: 0.0000011, Best test loss: 0.0000002, Time: 923.00
+Iteration: 129000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000002, Time: 930.28
+Iteration: 130000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000002, Time: 937.49
+Iteration: 131000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 944.97
+Iteration: 132000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000002, Time: 952.09
+Iteration: 133000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000002, Time: 959.19
+Iteration: 134000, Train loss: 0.0000026, Test loss: 0.0000026, Best test loss: 0.0000002, Time: 966.55
+Iteration: 135000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000002, Time: 973.80
+Iteration: 136000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 980.79
+Iteration: 137000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 988.04
+Iteration: 138000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000002, Time: 995.27
+Iteration: 139000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000002, Time: 1002.54
+Iteration: 140000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000002, Time: 1009.81
+Iteration: 141000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000002, Time: 1017.10
+Iteration: 142000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 1024.49
+Iteration: 143000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000002, Time: 1031.85
+Iteration: 144000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000002, Time: 1039.07
+New best model saved at iteration 145000 with test MSE: 0.0000002
+Iteration: 145000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 1046.45
+Iteration: 146000, Train loss: 0.0000018, Test loss: 0.0000018, Best test loss: 0.0000002, Time: 1053.35
+Iteration: 147000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000002, Time: 1060.47
+Iteration: 148000, Train loss: 0.0000018, Test loss: 0.0000018, Best test loss: 0.0000002, Time: 1067.71
+Iteration: 149000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000002, Time: 1074.73
+Iteration: 150000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 1081.62
+Iteration: 151000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 1088.73
+Iteration: 152000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 1095.91
+Iteration: 153000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 1102.99
+Iteration: 154000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 1110.24
+Iteration: 155000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000002, Time: 1117.47
+New best model saved at iteration 156000 with test MSE: 0.0000001
+Iteration: 156000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1124.71
+Iteration: 157000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1131.83
+Iteration: 158000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1139.08
+Iteration: 159000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 1146.12
+Iteration: 160000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1153.65
+Iteration: 161000, Train loss: 0.0000015, Test loss: 0.0000015, Best test loss: 0.0000001, Time: 1161.12
+Iteration: 162000, Train loss: 0.0000055, Test loss: 0.0000055, Best test loss: 0.0000001, Time: 1168.07
+Iteration: 163000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 1175.31
+Iteration: 164000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1182.54
+Iteration: 165000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000001, Time: 1189.44
+Iteration: 166000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 1196.70
+New best model saved at iteration 167000 with test MSE: 0.0000001
+Iteration: 167000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1203.78
+Iteration: 168000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1210.47
+Iteration: 169000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000001, Time: 1217.34
+Iteration: 170000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 1224.69
+Iteration: 171000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000001, Time: 1231.75
+Iteration: 172000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1238.75
+Iteration: 173000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 1245.97
+Iteration: 174000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 1252.95
+Iteration: 175000, Train loss: 0.0000022, Test loss: 0.0000022, Best test loss: 0.0000001, Time: 1259.90
+Iteration: 176000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000001, Time: 1266.78
+Iteration: 177000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 1273.53
+Iteration: 178000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000001, Time: 1280.08
+Iteration: 179000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1286.49
+Iteration: 180000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1293.00
+Iteration: 181000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 1299.75
+Iteration: 182000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000001, Time: 1306.85
+Iteration: 183000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000001, Time: 1313.63
+Iteration: 184000, Train loss: 0.0000018, Test loss: 0.0000018, Best test loss: 0.0000001, Time: 1320.58
+Iteration: 185000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 1327.21
+Iteration: 186000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1333.80
+Iteration: 187000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000001, Time: 1340.54
+Iteration: 188000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 1347.79
 New best model saved at iteration 189000 with test MSE: 0.0000001
-Iteration: 189000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 14227.18
-Iteration: 190000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 15284.24
-Iteration: 191000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 15298.91
-Iteration: 192000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 15313.46
-Iteration: 193000, Train loss: 0.0000021, Test loss: 0.0000021, Best test loss: 0.0000001, Time: 15328.22
-Iteration: 194000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000001, Time: 15343.05
-Iteration: 195000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 16371.32
-Iteration: 196000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 16385.96
-Iteration: 197000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000001, Time: 16400.70
-New best model saved at iteration 198000 with test MSE: 0.0000001
-Iteration: 198000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 16415.37
-Iteration: 199000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 16430.04
+Iteration: 189000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1355.07
+Iteration: 190000, Train loss: 0.0000013, Test loss: 0.0000013, Best test loss: 0.0000001, Time: 1362.36
+Iteration: 191000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 1369.34
+Iteration: 192000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000001, Time: 1376.85
+Iteration: 193000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 1384.73
+Iteration: 194000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 1392.23
+Iteration: 195000, Train loss: 0.0000011, Test loss: 0.0000011, Best test loss: 0.0000001, Time: 1399.70
+Iteration: 196000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000001, Time: 1407.04
+Iteration: 197000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000001, Time: 1414.00
+Iteration: 198000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 1421.64
+Iteration: 199000, Train loss: 0.0000047, Test loss: 0.0000047, Best test loss: 0.0000001, Time: 1428.55
 </pre></div>
 </div>
-<img alt="_images/cc40e58ddcb6e0a1fb76e8d1cb67ae09ccdcc1ad0459c79f3583f7d840176c9c.png" src="_images/cc40e58ddcb6e0a1fb76e8d1cb67ae09ccdcc1ad0459c79f3583f7d840176c9c.png" />
+<img alt="_images/949e2c00142b1afc1ce6072bce064e576634da86acb473baeea5b266705d6f90.png" src="_images/949e2c00142b1afc1ce6072bce064e576634da86acb473baeea5b266705d6f90.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time (sec) to complete:
-16446.993324041367
+1461.7830984592438
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
@@ -1039,15 +1105,14 @@ Iteration: 199000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the best model parameters</span>
 <span class="n">best_params</span> <span class="o">=</span> <span class="n">load_model_params</span><span class="p">(</span><span class="n">resultdir</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;model_params_best.pkl&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loaded best model parameters&quot;</span><span class="p">)</span>
 
 <span class="c1"># Predictions</span>
 <span class="n">mse_list_x</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">mse_list_y</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="n">branch_inputs</span> <span class="o">=</span> <span class="n">inputs_test</span>
-<span class="n">trunk_inputs_ef</span> <span class="o">=</span> <span class="n">grid</span>
-<span class="n">prediction_x</span><span class="p">,</span> <span class="n">prediction_y</span> <span class="o">=</span> <span class="n">DeepONet</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">branch_inputs</span><span class="p">,</span> <span class="n">trunk_inputs</span><span class="p">)</span> <span class="c1"># (bs, neval) = (1, nt*nz)</span>
+<span class="n">trunk_inputs</span> <span class="o">=</span> <span class="n">grid</span>
+<span class="n">prediction_x</span><span class="p">,</span> <span class="n">prediction_y</span> <span class="o">=</span> <span class="n">DeepONet</span><span class="p">(</span><span class="n">best_params</span><span class="p">,</span> <span class="n">branch_inputs</span><span class="p">,</span> <span class="n">trunk_inputs</span><span class="p">)</span> <span class="c1"># (bs, neval) = (1, nt*nz)</span>
 
 <span class="n">save_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Loading&#39;</span><span class="p">:</span> <span class="n">inputs_test</span><span class="p">,</span> <span class="s1">&#39;pred_x&#39;</span><span class="p">:</span> <span class="n">prediction_x</span><span class="p">,</span> <span class="s1">&#39;pred_y&#39;</span><span class="p">:</span> <span class="n">prediction_y</span><span class="p">,</span>\
              <span class="s1">&#39;target_x&#39;</span><span class="p">:</span> <span class="n">outputs_x_test</span><span class="p">,</span> <span class="s1">&#39;target_y&#39;</span><span class="p">:</span> <span class="n">outputs_y_test</span><span class="p">}</span>
@@ -1104,7 +1169,7 @@ Saved the prediction for all the test samples
     <span class="n">branch_inputs</span> <span class="o">=</span> <span class="n">inputs_test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_sensor</span><span class="p">)</span>
     <span class="n">trunk_inputs</span> <span class="o">=</span> <span class="n">grid</span>
 
-    <span class="n">prediction_x_i</span><span class="p">,</span> <span class="n">prediction_y_i</span> <span class="o">=</span> <span class="n">DeepONet</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">branch_inputs</span><span class="p">,</span> <span class="n">trunk_inputs</span><span class="p">)</span>
+    <span class="n">prediction_x_i</span><span class="p">,</span> <span class="n">prediction_y_i</span> <span class="o">=</span> <span class="n">DeepONet</span><span class="p">(</span><span class="n">best_params</span><span class="p">,</span> <span class="n">branch_inputs</span><span class="p">,</span> <span class="n">trunk_inputs</span><span class="p">)</span>
     <span class="n">target_x_i</span> <span class="o">=</span> <span class="n">outputs_x_test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
     <span class="n">target_y_i</span> <span class="o">=</span> <span class="n">outputs_y_test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 
@@ -1218,153 +1283,155 @@ Saved the prediction for all the test samples
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Red">TEST SAMPLE 10</span>
-Rel. L2 Error (X-Displacement) = 0.0057, R2 score (X-Displacement) = 0.9999
-Rel. L2 Error (Y-Displacement) = 0.0043, R2 score (Y-Displacement) = 1.0
+Rel. L2 Error (X-Displacement) = 0.0047, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0018, R2 score (Y-Displacement) = 1.0
 </pre></div>
 </div>
-<img alt="_images/1226f1d883b3bdfa83939155659c7c8f01afe644938023fd8ff17d0407b9c5b6.png" src="_images/1226f1d883b3bdfa83939155659c7c8f01afe644938023fd8ff17d0407b9c5b6.png" />
+<img alt="_images/2d9cbb2d41a046a43eec861774123c572807d32093a7c8e55b7e687d34f613b9.png" src="_images/2d9cbb2d41a046a43eec861774123c572807d32093a7c8e55b7e687d34f613b9.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
 <span class=" -Color -Color-Red">TEST SAMPLE 20</span>
-Rel. L2 Error (X-Displacement) = 0.0078, R2 score (X-Displacement) = 0.9999
-Rel. L2 Error (Y-Displacement) = 0.0036, R2 score (Y-Displacement) = 1.0
+Rel. L2 Error (X-Displacement) = 0.0052, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0029, R2 score (Y-Displacement) = 1.0
 </pre></div>
 </div>
-<img alt="_images/1492890fc63eddfc9c9d489baa1aee00d7122e40648845c02d6d22d4e325266a.png" src="_images/1492890fc63eddfc9c9d489baa1aee00d7122e40648845c02d6d22d4e325266a.png" />
+<img alt="_images/1edd70aff49fd66f24825c97678169b5f61a93e9a93c0188507f8f80147e4af9.png" src="_images/1edd70aff49fd66f24825c97678169b5f61a93e9a93c0188507f8f80147e4af9.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
 <span class=" -Color -Color-Red">TEST SAMPLE 30</span>
-Rel. L2 Error (X-Displacement) = 0.0062, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0034, R2 score (Y-Displacement) = 1.0
+Rel. L2 Error (X-Displacement) = 0.0048, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0037, R2 score (Y-Displacement) = 1.0
 </pre></div>
 </div>
-<img alt="_images/f7ff99961750e6b75ada048479a15a73238e62d70b9c69964c026de79a7374e2.png" src="_images/f7ff99961750e6b75ada048479a15a73238e62d70b9c69964c026de79a7374e2.png" />
+<img alt="_images/c5646d77ee6959a5e08fc1d4f73742405e69fc4307ceab7fa8cd380f055e20ea.png" src="_images/c5646d77ee6959a5e08fc1d4f73742405e69fc4307ceab7fa8cd380f055e20ea.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
 <span class=" -Color -Color-Red">TEST SAMPLE 40</span>
-Rel. L2 Error (X-Displacement) = 0.0057, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0035, R2 score (Y-Displacement) = 1.0
+Rel. L2 Error (X-Displacement) = 0.0051, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0039, R2 score (Y-Displacement) = 1.0
 </pre></div>
 </div>
-<img alt="_images/c5af7a9955ec2eaa503667e4c84a7e3765d825049f8024c226dc0e0e50f5e138.png" src="_images/c5af7a9955ec2eaa503667e4c84a7e3765d825049f8024c226dc0e0e50f5e138.png" />
+<img alt="_images/385ae5b18a0f3c5ae44de78176069d5fff5130939f602d2169c644eb7d7f37c6.png" src="_images/385ae5b18a0f3c5ae44de78176069d5fff5130939f602d2169c644eb7d7f37c6.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
 <span class=" -Color -Color-Red">TEST SAMPLE 50</span>
-Rel. L2 Error (X-Displacement) = 0.0078, R2 score (X-Displacement) = 0.9999
-Rel. L2 Error (Y-Displacement) = 0.0051, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/eb80e46594bc7e939b3fd8a3f80ef49e3c09cff867edce10f36714219fc5ad01.png" src="_images/eb80e46594bc7e939b3fd8a3f80ef49e3c09cff867edce10f36714219fc5ad01.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 60</span>
-Rel. L2 Error (X-Displacement) = 0.0133, R2 score (X-Displacement) = 0.9998
-Rel. L2 Error (Y-Displacement) = 0.0034, R2 score (Y-Displacement) = 0.9999
-</pre></div>
-</div>
-<img alt="_images/b6f7412648b68e40c660a3809d8a00b4829abe7772daf64d6c3c7ca3d606554f.png" src="_images/b6f7412648b68e40c660a3809d8a00b4829abe7772daf64d6c3c7ca3d606554f.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 70</span>
-Rel. L2 Error (X-Displacement) = 0.0081, R2 score (X-Displacement) = 0.9999
-Rel. L2 Error (Y-Displacement) = 0.0031, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/eee6e6631fe0201f56684868f2990a306218d287412ed27f6259dfa0023c5997.png" src="_images/eee6e6631fe0201f56684868f2990a306218d287412ed27f6259dfa0023c5997.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 80</span>
-Rel. L2 Error (X-Displacement) = 0.0059, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0027, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/c558d29881938d279ccd707cf9ed5cefe2d83dbef1fa0d40176222597c1cf130.png" src="_images/c558d29881938d279ccd707cf9ed5cefe2d83dbef1fa0d40176222597c1cf130.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 90</span>
-Rel. L2 Error (X-Displacement) = 0.0073, R2 score (X-Displacement) = 0.9999
-Rel. L2 Error (Y-Displacement) = 0.0042, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/f965023169b34a94f66830f851d349b6f7130900ee512955df043b1fac00bc5c.png" src="_images/f965023169b34a94f66830f851d349b6f7130900ee512955df043b1fac00bc5c.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 100</span>
-Rel. L2 Error (X-Displacement) = 0.0078, R2 score (X-Displacement) = 0.9999
-Rel. L2 Error (Y-Displacement) = 0.0043, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/285b902397f1c4e80afdc9eb749b7e90f438ac9d05665a82060265c699afb5d3.png" src="_images/285b902397f1c4e80afdc9eb749b7e90f438ac9d05665a82060265c699afb5d3.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 110</span>
-Rel. L2 Error (X-Displacement) = 0.005, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0034, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/17ff52bb62e722245eb987483c26f49a4137cf398af9bfa57abed9a2c957c85e.png" src="_images/17ff52bb62e722245eb987483c26f49a4137cf398af9bfa57abed9a2c957c85e.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 120</span>
-Rel. L2 Error (X-Displacement) = 0.0145, R2 score (X-Displacement) = 0.9998
-Rel. L2 Error (Y-Displacement) = 0.0043, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/3553aaaeca7456648344b44c798ccc0bffefc6d76b6c6001b10bec395ec117da.png" src="_images/3553aaaeca7456648344b44c798ccc0bffefc6d76b6c6001b10bec395ec117da.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 130</span>
-Rel. L2 Error (X-Displacement) = 0.0069, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0036, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/7a2bb721f68e08aae7707e16c8072894bac6d602bfa1ece09d3b21056422b172.png" src="_images/7a2bb721f68e08aae7707e16c8072894bac6d602bfa1ece09d3b21056422b172.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 140</span>
-Rel. L2 Error (X-Displacement) = 0.0051, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0034, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/1d99d426fd8d5fde0b37b53cc3f1462d33318244a2750e7e64ad4a6a855e6cf7.png" src="_images/1d99d426fd8d5fde0b37b53cc3f1462d33318244a2750e7e64ad4a6a855e6cf7.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 150</span>
-Rel. L2 Error (X-Displacement) = 0.0113, R2 score (X-Displacement) = 0.9999
-Rel. L2 Error (Y-Displacement) = 0.0042, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/4b8a93d90c2ee6d01e5736514828f700bf64e156609584e5532686bf1aa18f99.png" src="_images/4b8a93d90c2ee6d01e5736514828f700bf64e156609584e5532686bf1aa18f99.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 160</span>
-Rel. L2 Error (X-Displacement) = 0.0038, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0022, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/02193f7312eabfa86314208da95350ca1382c677298102ec758d1bd68648c605.png" src="_images/02193f7312eabfa86314208da95350ca1382c677298102ec758d1bd68648c605.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 170</span>
-Rel. L2 Error (X-Displacement) = 0.0105, R2 score (X-Displacement) = 0.9999
-Rel. L2 Error (Y-Displacement) = 0.0035, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/0bfd5ca8906b4f32c025b60f44b340cc53212224ca16ee5f74e04143124c14e8.png" src="_images/0bfd5ca8906b4f32c025b60f44b340cc53212224ca16ee5f74e04143124c14e8.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 180</span>
-Rel. L2 Error (X-Displacement) = 0.0053, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0035, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/44aa5f10bced37a59d9b7bb9efc1490f962ff799bebbbd152c12124a19543278.png" src="_images/44aa5f10bced37a59d9b7bb9efc1490f962ff799bebbbd152c12124a19543278.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 190</span>
-Rel. L2 Error (X-Displacement) = 0.0063, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0034, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/05c0e2407ae4cc1e25c338542ee61ae37789b1a7090b42b93170544511a21123.png" src="_images/05c0e2407ae4cc1e25c338542ee61ae37789b1a7090b42b93170544511a21123.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 200</span>
-Rel. L2 Error (X-Displacement) = 0.0045, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (X-Displacement) = 0.0054, R2 score (X-Displacement) = 0.9999
 Rel. L2 Error (Y-Displacement) = 0.0026, R2 score (Y-Displacement) = 1.0
 </pre></div>
 </div>
-<img alt="_images/0f4fb5833b8f3bb2c416532a02d09bb1448f8d29146e84028d6e18fe69196874.png" src="_images/0f4fb5833b8f3bb2c416532a02d09bb1448f8d29146e84028d6e18fe69196874.png" />
+<img alt="_images/b7e67eb33e138794977a558399a86c35d4f73ff96d359dd2cccea4a2785ddeb3.png" src="_images/b7e67eb33e138794977a558399a86c35d4f73ff96d359dd2cccea4a2785ddeb3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
+<span class=" -Color -Color-Red">TEST SAMPLE 60</span>
+Rel. L2 Error (X-Displacement) = 0.0102, R2 score (X-Displacement) = 0.9999
+Rel. L2 Error (Y-Displacement) = 0.0024, R2 score (Y-Displacement) = 0.9999
+</pre></div>
+</div>
+<img alt="_images/eb2a89c9f0123e832a598b99249d4c8899e07e75232a99e8adf11c12ab6835c5.png" src="_images/eb2a89c9f0123e832a598b99249d4c8899e07e75232a99e8adf11c12ab6835c5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
+<span class=" -Color -Color-Red">TEST SAMPLE 70</span>
+Rel. L2 Error (X-Displacement) = 0.0067, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0032, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/2ab3834eb09ec413e394b003c441c589a18a23feb3b76b83361129adaf6baffc.png" src="_images/2ab3834eb09ec413e394b003c441c589a18a23feb3b76b83361129adaf6baffc.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
+<span class=" -Color -Color-Red">TEST SAMPLE 80</span>
+Rel. L2 Error (X-Displacement) = 0.0048, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0023, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/9311616705c9d6b25ec3c80a1a8ff491e511e272192d4c796aae6f0cdf532b30.png" src="_images/9311616705c9d6b25ec3c80a1a8ff491e511e272192d4c796aae6f0cdf532b30.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
+<span class=" -Color -Color-Red">TEST SAMPLE 90</span>
+Rel. L2 Error (X-Displacement) = 0.0048, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0027, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/191e708a1d34e14d543a3735956fd2c90532c0172a7ab2ef3e1274f69d074865.png" src="_images/191e708a1d34e14d543a3735956fd2c90532c0172a7ab2ef3e1274f69d074865.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
+<span class=" -Color -Color-Red">TEST SAMPLE 100</span>
+Rel. L2 Error (X-Displacement) = 0.0059, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0028, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/57990c0e9d6f1a626e962466030989ba02a14102ab8cb743e682b02d08613fe2.png" src="_images/57990c0e9d6f1a626e962466030989ba02a14102ab8cb743e682b02d08613fe2.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
+<span class=" -Color -Color-Red">TEST SAMPLE 110</span>
+Rel. L2 Error (X-Displacement) = 0.0036, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0031, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/27913e1a6a31eee7f99ebd2c95a580f3ed83ca23889284c0f80ec33537f20d52.png" src="_images/27913e1a6a31eee7f99ebd2c95a580f3ed83ca23889284c0f80ec33537f20d52.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
+<span class=" -Color -Color-Red">TEST SAMPLE 120</span>
+Rel. L2 Error (X-Displacement) = 0.0091, R2 score (X-Displacement) = 0.9999
+Rel. L2 Error (Y-Displacement) = 0.0045, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/ed257a10186e3a3d7a7eb7d9059f25937857dd211219f26f9be60ad7dbca9ef1.png" src="_images/ed257a10186e3a3d7a7eb7d9059f25937857dd211219f26f9be60ad7dbca9ef1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
+<span class=" -Color -Color-Red">TEST SAMPLE 130</span>
+Rel. L2 Error (X-Displacement) = 0.0057, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0022, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/01da20aabee07b46d1f6d195188c4a65f365e25c88eb4533b5925b417f54dba5.png" src="_images/01da20aabee07b46d1f6d195188c4a65f365e25c88eb4533b5925b417f54dba5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
+<span class=" -Color -Color-Red">TEST SAMPLE 140</span>
+Rel. L2 Error (X-Displacement) = 0.0041, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0026, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/9033e876779a49b14a9df2afb66712a14f32f010ebe96217c132ef1d02a14528.png" src="_images/9033e876779a49b14a9df2afb66712a14f32f010ebe96217c132ef1d02a14528.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
+<span class=" -Color -Color-Red">TEST SAMPLE 150</span>
+Rel. L2 Error (X-Displacement) = 0.0106, R2 score (X-Displacement) = 0.9999
+Rel. L2 Error (Y-Displacement) = 0.0038, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/8c7ae3376df470c7e61659011b08a34834ec434eb3312075aa24b1da2cf64a0a.png" src="_images/8c7ae3376df470c7e61659011b08a34834ec434eb3312075aa24b1da2cf64a0a.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
+<span class=" -Color -Color-Red">TEST SAMPLE 160</span>
+Rel. L2 Error (X-Displacement) = 0.0049, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0031, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/adfe3860ff8a8611de41e30671da76133ef14a9d8ec4379c85048fd0c9e621ea.png" src="_images/adfe3860ff8a8611de41e30671da76133ef14a9d8ec4379c85048fd0c9e621ea.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
+<span class=" -Color -Color-Red">TEST SAMPLE 170</span>
+Rel. L2 Error (X-Displacement) = 0.0077, R2 score (X-Displacement) = 0.9999
+Rel. L2 Error (Y-Displacement) = 0.0029, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/b69b962c89de3fb07098282cfe96474ecd9c22625b5c100a00c6650332782a8f.png" src="_images/b69b962c89de3fb07098282cfe96474ecd9c22625b5c100a00c6650332782a8f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
+<span class=" -Color -Color-Red">TEST SAMPLE 180</span>
+Rel. L2 Error (X-Displacement) = 0.0038, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0028, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/b6b67ec581239923c25b6001512a9e2242e3f395050b4e9ff04ac8aeb86e0857.png" src="_images/b6b67ec581239923c25b6001512a9e2242e3f395050b4e9ff04ac8aeb86e0857.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
+<span class=" -Color -Color-Red">TEST SAMPLE 190</span>
+Rel. L2 Error (X-Displacement) = 0.0055, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0034, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/30299b8252ac66f685becbbe445270f3db8e1d3502bf9d44ca0f5d3918557301.png" src="_images/30299b8252ac66f685becbbe445270f3db8e1d3502bf9d44ca0f5d3918557301.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
+<span class=" -Color -Color-Red">TEST SAMPLE 200</span>
+Rel. L2 Error (X-Displacement) = 0.0043, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0031, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/0f482500f6e3efb84d3a5dd0248d001eea0302de1664dd61284e148b5ac95ef1.png" src="_images/0f482500f6e3efb84d3a5dd0248d001eea0302de1664dd61284e148b5ac95ef1.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
 Mean Squared Error Test (X-Displacement):
- 6.52236174580878e-08
+ 4.613826930288667e-08
 Mean Squared Error Test (Y-Displacement):
- 4.0805381738451276e-07
+ 2.9578710442734745e-07
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1412,6 +1479,29 @@ Mean Squared Error Test (Y-Displacement):
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-elastic-cantilever-beam-under-displacement-boundary-conditions">Linear elastic cantilever beam under displacement boundary conditions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-packages">Install packages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fetch-geometry-and-trained-model-data">Fetch geometry and trained model data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-neural-network">Define a Neural Network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
