@@ -436,7 +436,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mkdir<span class="w"> </span>-p<span class="w"> </span>deeponet_results
-<span class="o">!</span>wget<span class="w"> </span>https://github.com/DesignSafe-Training/deeponet/raw/refs/heads/main/model_params_best.pkl<span class="w"> </span>-P<span class="w"> </span>deeponet_results/
+<span class="o">!</span>curl<span class="w"> </span>-O<span class="w"> </span>https://raw.githubusercontent.com/DesignSafe-Training/deeponet/refs/heads/main/model_params_best.pkl<span class="w"> </span>--output-dir<span class="w"> </span>deeponet_results/
 </pre></div>
 </div>
 </div>
@@ -462,7 +462,7 @@ model_params_best.p 100%[===================&gt;] 594.43K  --.-KB/s    in 0.05s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget<span class="w"> </span>https://github.com/DesignSafe-Training/deeponet/raw/refs/heads/main/cantilever_beam_deflection.mat
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>curl<span class="w"> </span>-o<span class="w"> </span>cantilever_beam_deflection.mat<span class="w"> </span>https://raw.githubusercontent.com/DesignSafe-Training/deeponet/refs/heads/main/cantilever_beam_deflection.mat
 </pre></div>
 </div>
 </div>
@@ -899,7 +899,7 @@ Saved initial model at iteration 0
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the best model parameters</span>
 <span class="n">best_params</span> <span class="o">=</span> <span class="n">load_model_params</span><span class="p">(</span><span class="n">resultdir</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;model_params_best.pkl&#39;</span><span class="p">)</span>
-
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loaded the best model parameters&quot;</span><span class="p">)</span>
 <span class="c1"># Predictions</span>
 <span class="n">mse_list_x</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">mse_list_y</span> <span class="o">=</span> <span class="p">[]</span>
