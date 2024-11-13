@@ -6,5 +6,5 @@ Traditional numerical modeling techniques, while accurate, often prove limiting 
 <p align="center">
   <img src="https://github.com/DesignSafe-Training/deeponet/blob/main/Schematic.png" alt="Traditional Approach" width="900"/>
   <br/>
-  <strong>Figure 1: Traditional Approach</strong>
+  <strong>Schematic</strong>
 </p>
