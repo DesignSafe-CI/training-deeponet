@@ -439,10 +439,48 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2024-11-13 13:12:18--  https://github.com/DesignSafe-Training/deeponet/raw/refs/heads/main/model_params_best.pkl
+Resolving github.com (github.com)... 140.82.113.3
+Connecting to github.com (github.com)|140.82.113.3|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://raw.githubusercontent.com/DesignSafe-Training/deeponet/refs/heads/main/model_params_best.pkl [following]
+--2024-11-13 13:12:18--  https://raw.githubusercontent.com/DesignSafe-Training/deeponet/refs/heads/main/model_params_best.pkl
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.109.133, 185.199.110.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 608698 (594K) [application/octet-stream]
+Saving to: ‘deeponet_results/model_params_best.pkl’
+
+model_params_best.p 100%[===================&gt;] 594.43K  --.-KB/s    in 0.05s   
+
+2024-11-13 13:12:19 (10.6 MB/s) - ‘deeponet_results/model_params_best.pkl’ saved [608698/608698]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget<span class="w"> </span>https://github.com/DesignSafe-Training/deeponet/raw/refs/heads/main/cantilever_beam_deflection.mat
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2024-11-13 13:12:26--  https://github.com/DesignSafe-Training/deeponet/raw/refs/heads/main/cantilever_beam_deflection.mat
+Resolving github.com (github.com)... 140.82.114.4
+Connecting to github.com (github.com)|140.82.114.4|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://raw.githubusercontent.com/DesignSafe-Training/deeponet/refs/heads/main/cantilever_beam_deflection.mat [following]
+--2024-11-13 13:12:27--  https://raw.githubusercontent.com/DesignSafe-Training/deeponet/refs/heads/main/cantilever_beam_deflection.mat
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.109.133, 185.199.110.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 20046980 (19M) [application/octet-stream]
+Saving to: ‘cantilever_beam_deflection.mat.1’
+
+cantilever_beam_def 100%[===================&gt;]  19.12M  --.-KB/s    in 0.1s    
+
+2024-11-13 13:12:27 (154 MB/s) - ‘cantilever_beam_deflection.mat.1’ saved [20046980/20046980]
 </pre></div>
 </div>
 </div>
@@ -838,262 +876,14 @@ Shape of y-displacement matrix corresponding to the testing loads: (200, 1314)
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>------------- START TRAINING -------------
 Saved initial model at iteration 0
-New best model saved at iteration 0 with test MSE: 0.0390862
-Iteration:   0, Train loss: 0.0390862, Test loss: 0.0390862, Best test loss: 0.0390862, Time: 2.12
-New best model saved at iteration 1000 with test MSE: 0.0027250
-Iteration: 1000, Train loss: 0.0027250, Test loss: 0.0027250, Best test loss: 0.0027250, Time: 9.67
-New best model saved at iteration 2000 with test MSE: 0.0007205
-Iteration: 2000, Train loss: 0.0007205, Test loss: 0.0007205, Best test loss: 0.0007205, Time: 16.55
-New best model saved at iteration 3000 with test MSE: 0.0003108
-Iteration: 3000, Train loss: 0.0003108, Test loss: 0.0003108, Best test loss: 0.0003108, Time: 23.31
-New best model saved at iteration 4000 with test MSE: 0.0002083
-Iteration: 4000, Train loss: 0.0002083, Test loss: 0.0002083, Best test loss: 0.0002083, Time: 30.40
-New best model saved at iteration 5000 with test MSE: 0.0001633
-Iteration: 5000, Train loss: 0.0001633, Test loss: 0.0001633, Best test loss: 0.0001633, Time: 37.24
-New best model saved at iteration 6000 with test MSE: 0.0001012
-Iteration: 6000, Train loss: 0.0001012, Test loss: 0.0001012, Best test loss: 0.0001012, Time: 44.31
-New best model saved at iteration 7000 with test MSE: 0.0000861
-Iteration: 7000, Train loss: 0.0000861, Test loss: 0.0000861, Best test loss: 0.0000861, Time: 51.01
-New best model saved at iteration 8000 with test MSE: 0.0000759
-Iteration: 8000, Train loss: 0.0000759, Test loss: 0.0000759, Best test loss: 0.0000759, Time: 57.87
-New best model saved at iteration 9000 with test MSE: 0.0000620
-Iteration: 9000, Train loss: 0.0000620, Test loss: 0.0000620, Best test loss: 0.0000620, Time: 64.67
-New best model saved at iteration 10000 with test MSE: 0.0000543
-Iteration: 10000, Train loss: 0.0000543, Test loss: 0.0000543, Best test loss: 0.0000543, Time: 71.39
-New best model saved at iteration 11000 with test MSE: 0.0000367
-Iteration: 11000, Train loss: 0.0000367, Test loss: 0.0000367, Best test loss: 0.0000367, Time: 78.15
-New best model saved at iteration 12000 with test MSE: 0.0000302
-Iteration: 12000, Train loss: 0.0000302, Test loss: 0.0000302, Best test loss: 0.0000302, Time: 84.93
-Iteration: 13000, Train loss: 0.0000326, Test loss: 0.0000326, Best test loss: 0.0000302, Time: 92.48
-New best model saved at iteration 14000 with test MSE: 0.0000214
-Iteration: 14000, Train loss: 0.0000214, Test loss: 0.0000214, Best test loss: 0.0000214, Time: 99.62
-Iteration: 15000, Train loss: 0.0000313, Test loss: 0.0000313, Best test loss: 0.0000214, Time: 106.46
-New best model saved at iteration 16000 with test MSE: 0.0000163
-Iteration: 16000, Train loss: 0.0000163, Test loss: 0.0000163, Best test loss: 0.0000163, Time: 113.31
-New best model saved at iteration 17000 with test MSE: 0.0000151
-Iteration: 17000, Train loss: 0.0000151, Test loss: 0.0000151, Best test loss: 0.0000151, Time: 120.27
-New best model saved at iteration 18000 with test MSE: 0.0000144
-Iteration: 18000, Train loss: 0.0000144, Test loss: 0.0000144, Best test loss: 0.0000144, Time: 127.17
-Iteration: 19000, Train loss: 0.0000162, Test loss: 0.0000162, Best test loss: 0.0000144, Time: 133.93
-New best model saved at iteration 20000 with test MSE: 0.0000124
-Iteration: 20000, Train loss: 0.0000124, Test loss: 0.0000124, Best test loss: 0.0000124, Time: 140.86
-New best model saved at iteration 21000 with test MSE: 0.0000078
-Iteration: 21000, Train loss: 0.0000078, Test loss: 0.0000078, Best test loss: 0.0000078, Time: 148.12
-Iteration: 22000, Train loss: 0.0000110, Test loss: 0.0000110, Best test loss: 0.0000078, Time: 155.40
-New best model saved at iteration 23000 with test MSE: 0.0000050
-Iteration: 23000, Train loss: 0.0000050, Test loss: 0.0000050, Best test loss: 0.0000050, Time: 162.64
-New best model saved at iteration 24000 with test MSE: 0.0000035
-Iteration: 24000, Train loss: 0.0000035, Test loss: 0.0000035, Best test loss: 0.0000035, Time: 169.85
-Iteration: 25000, Train loss: 0.0000092, Test loss: 0.0000092, Best test loss: 0.0000035, Time: 177.03
-Iteration: 26000, Train loss: 0.0000044, Test loss: 0.0000044, Best test loss: 0.0000035, Time: 184.34
-New best model saved at iteration 27000 with test MSE: 0.0000031
-Iteration: 27000, Train loss: 0.0000031, Test loss: 0.0000031, Best test loss: 0.0000031, Time: 191.29
-New best model saved at iteration 28000 with test MSE: 0.0000027
-Iteration: 28000, Train loss: 0.0000027, Test loss: 0.0000027, Best test loss: 0.0000027, Time: 198.01
-Iteration: 29000, Train loss: 0.0000042, Test loss: 0.0000042, Best test loss: 0.0000027, Time: 205.32
-Iteration: 30000, Train loss: 0.0000027, Test loss: 0.0000027, Best test loss: 0.0000027, Time: 212.64
-New best model saved at iteration 31000 with test MSE: 0.0000025
-Iteration: 31000, Train loss: 0.0000025, Test loss: 0.0000025, Best test loss: 0.0000025, Time: 219.98
-Iteration: 32000, Train loss: 0.0000038, Test loss: 0.0000038, Best test loss: 0.0000025, Time: 227.34
-Iteration: 33000, Train loss: 0.0000029, Test loss: 0.0000029, Best test loss: 0.0000025, Time: 234.79
-Iteration: 34000, Train loss: 0.0000025, Test loss: 0.0000025, Best test loss: 0.0000025, Time: 242.01
-New best model saved at iteration 35000 with test MSE: 0.0000024
-Iteration: 35000, Train loss: 0.0000024, Test loss: 0.0000024, Best test loss: 0.0000024, Time: 249.14
-New best model saved at iteration 36000 with test MSE: 0.0000021
-Iteration: 36000, Train loss: 0.0000021, Test loss: 0.0000021, Best test loss: 0.0000021, Time: 256.77
-New best model saved at iteration 37000 with test MSE: 0.0000021
-Iteration: 37000, Train loss: 0.0000021, Test loss: 0.0000021, Best test loss: 0.0000021, Time: 264.23
-Iteration: 38000, Train loss: 0.0000030, Test loss: 0.0000030, Best test loss: 0.0000021, Time: 271.68
-Iteration: 39000, Train loss: 0.0000024, Test loss: 0.0000024, Best test loss: 0.0000021, Time: 279.22
-Iteration: 40000, Train loss: 0.0000031, Test loss: 0.0000031, Best test loss: 0.0000021, Time: 286.68
-Iteration: 41000, Train loss: 0.0000024, Test loss: 0.0000024, Best test loss: 0.0000021, Time: 294.03
-New best model saved at iteration 42000 with test MSE: 0.0000016
-Iteration: 42000, Train loss: 0.0000016, Test loss: 0.0000016, Best test loss: 0.0000016, Time: 301.45
-Iteration: 43000, Train loss: 0.0000019, Test loss: 0.0000019, Best test loss: 0.0000016, Time: 308.75
-New best model saved at iteration 44000 with test MSE: 0.0000013
-Iteration: 44000, Train loss: 0.0000013, Test loss: 0.0000013, Best test loss: 0.0000013, Time: 316.28
-Iteration: 45000, Train loss: 0.0000016, Test loss: 0.0000016, Best test loss: 0.0000013, Time: 323.76
-Iteration: 46000, Train loss: 0.0000020, Test loss: 0.0000020, Best test loss: 0.0000013, Time: 330.61
-Iteration: 47000, Train loss: 0.0000020, Test loss: 0.0000020, Best test loss: 0.0000013, Time: 337.92
-New best model saved at iteration 48000 with test MSE: 0.0000009
-Iteration: 48000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000009, Time: 345.38
-Iteration: 49000, Train loss: 0.0000034, Test loss: 0.0000034, Best test loss: 0.0000009, Time: 352.44
-Iteration: 50000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000009, Time: 359.45
-Iteration: 51000, Train loss: 0.0000067, Test loss: 0.0000067, Best test loss: 0.0000009, Time: 366.35
-Iteration: 52000, Train loss: 0.0000015, Test loss: 0.0000015, Best test loss: 0.0000009, Time: 373.58
-New best model saved at iteration 53000 with test MSE: 0.0000008
-Iteration: 53000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000008, Time: 381.21
-New best model saved at iteration 54000 with test MSE: 0.0000008
-Iteration: 54000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000008, Time: 388.84
-Iteration: 55000, Train loss: 0.0000018, Test loss: 0.0000018, Best test loss: 0.0000008, Time: 396.19
-Iteration: 56000, Train loss: 0.0000014, Test loss: 0.0000014, Best test loss: 0.0000008, Time: 403.56
-New best model saved at iteration 57000 with test MSE: 0.0000007
-Iteration: 57000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000007, Time: 410.76
-Iteration: 58000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000007, Time: 417.96
-Iteration: 59000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000007, Time: 425.37
-Iteration: 60000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000007, Time: 432.78
-Iteration: 61000, Train loss: 0.0000021, Test loss: 0.0000021, Best test loss: 0.0000007, Time: 440.09
-New best model saved at iteration 62000 with test MSE: 0.0000007
-Iteration: 62000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000007, Time: 447.23
-Iteration: 63000, Train loss: 0.0000012, Test loss: 0.0000012, Best test loss: 0.0000007, Time: 454.53
-New best model saved at iteration 64000 with test MSE: 0.0000006
-Iteration: 64000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000006, Time: 461.73
-Iteration: 65000, Train loss: 0.0000016, Test loss: 0.0000016, Best test loss: 0.0000006, Time: 468.78
-Iteration: 66000, Train loss: 0.0000015, Test loss: 0.0000015, Best test loss: 0.0000006, Time: 475.82
-Iteration: 67000, Train loss: 0.0000013, Test loss: 0.0000013, Best test loss: 0.0000006, Time: 482.93
-Iteration: 68000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000006, Time: 490.06
-New best model saved at iteration 69000 with test MSE: 0.0000006
-Iteration: 69000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000006, Time: 497.41
-Iteration: 70000, Train loss: 0.0000034, Test loss: 0.0000034, Best test loss: 0.0000006, Time: 504.64
-New best model saved at iteration 71000 with test MSE: 0.0000005
-Iteration: 71000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000005, Time: 511.74
-Iteration: 72000, Train loss: 0.0000100, Test loss: 0.0000100, Best test loss: 0.0000005, Time: 518.82
-Iteration: 73000, Train loss: 0.0000016, Test loss: 0.0000016, Best test loss: 0.0000005, Time: 525.91
-Iteration: 74000, Train loss: 0.0000021, Test loss: 0.0000021, Best test loss: 0.0000005, Time: 532.85
-Iteration: 75000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000005, Time: 540.19
-New best model saved at iteration 76000 with test MSE: 0.0000005
-Iteration: 76000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000005, Time: 547.46
-Iteration: 77000, Train loss: 0.0000015, Test loss: 0.0000015, Best test loss: 0.0000005, Time: 554.50
-Iteration: 78000, Train loss: 0.0000012, Test loss: 0.0000012, Best test loss: 0.0000005, Time: 561.47
-Iteration: 79000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000005, Time: 568.59
-Iteration: 80000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000005, Time: 575.89
-Iteration: 81000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000005, Time: 582.98
-New best model saved at iteration 82000 with test MSE: 0.0000005
-Iteration: 82000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000005, Time: 590.17
-Iteration: 83000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000005, Time: 597.27
-Iteration: 84000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000005, Time: 604.56
-Iteration: 85000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000005, Time: 611.81
-Iteration: 86000, Train loss: 0.0000015, Test loss: 0.0000015, Best test loss: 0.0000005, Time: 619.19
-Iteration: 87000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000005, Time: 626.27
-Iteration: 88000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000005, Time: 633.61
-Iteration: 89000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000005, Time: 640.84
-Iteration: 90000, Train loss: 0.0000021, Test loss: 0.0000021, Best test loss: 0.0000005, Time: 647.90
-Iteration: 91000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000005, Time: 654.91
-Iteration: 92000, Train loss: 0.0000011, Test loss: 0.0000011, Best test loss: 0.0000005, Time: 662.04
-New best model saved at iteration 93000 with test MSE: 0.0000004
-Iteration: 93000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000004, Time: 669.22
-Iteration: 94000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000004, Time: 676.37
-Iteration: 95000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000004, Time: 683.59
-Iteration: 96000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000004, Time: 690.70
-Iteration: 97000, Train loss: 0.0000017, Test loss: 0.0000017, Best test loss: 0.0000004, Time: 697.76
-Iteration: 98000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000004, Time: 704.75
-New best model saved at iteration 99000 with test MSE: 0.0000004
-Iteration: 99000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000004, Time: 711.63
-Iteration: 100000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000004, Time: 723.55
-Iteration: 101000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000004, Time: 730.89
-Iteration: 102000, Train loss: 0.0000018, Test loss: 0.0000018, Best test loss: 0.0000004, Time: 738.28
-Iteration: 103000, Train loss: 0.0000030, Test loss: 0.0000030, Best test loss: 0.0000004, Time: 745.61
-Iteration: 104000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000004, Time: 752.90
-New best model saved at iteration 105000 with test MSE: 0.0000004
-Iteration: 105000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000004, Time: 760.06
-Iteration: 106000, Train loss: 0.0000099, Test loss: 0.0000099, Best test loss: 0.0000004, Time: 767.18
-Iteration: 107000, Train loss: 0.0000022, Test loss: 0.0000022, Best test loss: 0.0000004, Time: 774.22
-New best model saved at iteration 108000 with test MSE: 0.0000004
-Iteration: 108000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000004, Time: 781.18
-Iteration: 109000, Train loss: 0.0000014, Test loss: 0.0000014, Best test loss: 0.0000004, Time: 788.04
-Iteration: 110000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000004, Time: 794.66
-New best model saved at iteration 111000 with test MSE: 0.0000003
-Iteration: 111000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000003, Time: 801.76
-Iteration: 112000, Train loss: 0.0000033, Test loss: 0.0000033, Best test loss: 0.0000003, Time: 808.85
-Iteration: 113000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000003, Time: 816.08
-Iteration: 114000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000003, Time: 823.08
-Iteration: 115000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000003, Time: 830.20
-New best model saved at iteration 116000 with test MSE: 0.0000003
-Iteration: 116000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000003, Time: 837.57
-Iteration: 117000, Train loss: 0.0000020, Test loss: 0.0000020, Best test loss: 0.0000003, Time: 844.85
-Iteration: 118000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000003, Time: 851.86
-New best model saved at iteration 119000 with test MSE: 0.0000002
-Iteration: 119000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 858.83
-Iteration: 120000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000002, Time: 865.53
-Iteration: 121000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000002, Time: 872.37
-Iteration: 122000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000002, Time: 879.63
-Iteration: 123000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000002, Time: 886.48
-New best model saved at iteration 124000 with test MSE: 0.0000002
-Iteration: 124000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 893.42
-Iteration: 125000, Train loss: 0.0000013, Test loss: 0.0000013, Best test loss: 0.0000002, Time: 900.97
-Iteration: 126000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000002, Time: 908.32
-Iteration: 127000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000002, Time: 915.65
-Iteration: 128000, Train loss: 0.0000011, Test loss: 0.0000011, Best test loss: 0.0000002, Time: 923.00
-Iteration: 129000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000002, Time: 930.28
-Iteration: 130000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000002, Time: 937.49
-Iteration: 131000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 944.97
-Iteration: 132000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000002, Time: 952.09
-Iteration: 133000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000002, Time: 959.19
-Iteration: 134000, Train loss: 0.0000026, Test loss: 0.0000026, Best test loss: 0.0000002, Time: 966.55
-Iteration: 135000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000002, Time: 973.80
-Iteration: 136000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 980.79
-Iteration: 137000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 988.04
-Iteration: 138000, Train loss: 0.0000010, Test loss: 0.0000010, Best test loss: 0.0000002, Time: 995.27
-Iteration: 139000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000002, Time: 1002.54
-Iteration: 140000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000002, Time: 1009.81
-Iteration: 141000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000002, Time: 1017.10
-Iteration: 142000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 1024.49
-Iteration: 143000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000002, Time: 1031.85
-Iteration: 144000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000002, Time: 1039.07
-New best model saved at iteration 145000 with test MSE: 0.0000002
-Iteration: 145000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 1046.45
-Iteration: 146000, Train loss: 0.0000018, Test loss: 0.0000018, Best test loss: 0.0000002, Time: 1053.35
-Iteration: 147000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000002, Time: 1060.47
-Iteration: 148000, Train loss: 0.0000018, Test loss: 0.0000018, Best test loss: 0.0000002, Time: 1067.71
-Iteration: 149000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000002, Time: 1074.73
-Iteration: 150000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 1081.62
-Iteration: 151000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 1088.73
-Iteration: 152000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 1095.91
-Iteration: 153000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 1102.99
-Iteration: 154000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000002, Time: 1110.24
-Iteration: 155000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000002, Time: 1117.47
-New best model saved at iteration 156000 with test MSE: 0.0000001
-Iteration: 156000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1124.71
-Iteration: 157000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1131.83
-Iteration: 158000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1139.08
-Iteration: 159000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 1146.12
-Iteration: 160000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1153.65
-Iteration: 161000, Train loss: 0.0000015, Test loss: 0.0000015, Best test loss: 0.0000001, Time: 1161.12
-Iteration: 162000, Train loss: 0.0000055, Test loss: 0.0000055, Best test loss: 0.0000001, Time: 1168.07
-Iteration: 163000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 1175.31
-Iteration: 164000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1182.54
-Iteration: 165000, Train loss: 0.0000006, Test loss: 0.0000006, Best test loss: 0.0000001, Time: 1189.44
-Iteration: 166000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 1196.70
-New best model saved at iteration 167000 with test MSE: 0.0000001
-Iteration: 167000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1203.78
-Iteration: 168000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1210.47
-Iteration: 169000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000001, Time: 1217.34
-Iteration: 170000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 1224.69
-Iteration: 171000, Train loss: 0.0000005, Test loss: 0.0000005, Best test loss: 0.0000001, Time: 1231.75
-Iteration: 172000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1238.75
-Iteration: 173000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 1245.97
-Iteration: 174000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 1252.95
-Iteration: 175000, Train loss: 0.0000022, Test loss: 0.0000022, Best test loss: 0.0000001, Time: 1259.90
-Iteration: 176000, Train loss: 0.0000008, Test loss: 0.0000008, Best test loss: 0.0000001, Time: 1266.78
-Iteration: 177000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 1273.53
-Iteration: 178000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000001, Time: 1280.08
-Iteration: 179000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1286.49
-Iteration: 180000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1293.00
-Iteration: 181000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 1299.75
-Iteration: 182000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000001, Time: 1306.85
-Iteration: 183000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000001, Time: 1313.63
-Iteration: 184000, Train loss: 0.0000018, Test loss: 0.0000018, Best test loss: 0.0000001, Time: 1320.58
-Iteration: 185000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 1327.21
-Iteration: 186000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1333.80
-Iteration: 187000, Train loss: 0.0000009, Test loss: 0.0000009, Best test loss: 0.0000001, Time: 1340.54
-Iteration: 188000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 1347.79
-New best model saved at iteration 189000 with test MSE: 0.0000001
-Iteration: 189000, Train loss: 0.0000001, Test loss: 0.0000001, Best test loss: 0.0000001, Time: 1355.07
-Iteration: 190000, Train loss: 0.0000013, Test loss: 0.0000013, Best test loss: 0.0000001, Time: 1362.36
-Iteration: 191000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 1369.34
-Iteration: 192000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000001, Time: 1376.85
-Iteration: 193000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 1384.73
-Iteration: 194000, Train loss: 0.0000002, Test loss: 0.0000002, Best test loss: 0.0000001, Time: 1392.23
-Iteration: 195000, Train loss: 0.0000011, Test loss: 0.0000011, Best test loss: 0.0000001, Time: 1399.70
-Iteration: 196000, Train loss: 0.0000007, Test loss: 0.0000007, Best test loss: 0.0000001, Time: 1407.04
-Iteration: 197000, Train loss: 0.0000004, Test loss: 0.0000004, Best test loss: 0.0000001, Time: 1414.00
-Iteration: 198000, Train loss: 0.0000003, Test loss: 0.0000003, Best test loss: 0.0000001, Time: 1421.64
-Iteration: 199000, Train loss: 0.0000047, Test loss: 0.0000047, Best test loss: 0.0000001, Time: 1428.55
 </pre></div>
 </div>
-<img alt="_images/949e2c00142b1afc1ce6072bce064e576634da86acb473baeea5b266705d6f90.png" src="_images/949e2c00142b1afc1ce6072bce064e576634da86acb473baeea5b266705d6f90.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training (New Best: 1.55e-06 @ iter 195000): 100%|███████| 200000/200000 [20:14&lt;00:00, 164.63it/s, Train Loss=1.61e-06, Test Loss=1.61e-06, Best Test=1.55e-06, Time=1.21e+03s]
+</pre></div>
+</div>
+<img alt="_images/326b63a0ecf38665f3fb3c877a753d04cb244fe82abf3a4af5eacfe9541c664f.png" src="_images/326b63a0ecf38665f3fb3c877a753d04cb244fe82abf3a4af5eacfe9541c664f.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time (sec) to complete:
-1461.7830984592438
+1244.1298921108246
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
