@@ -75,10 +75,9 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'deeponet';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'deeponet-designsafe';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Deep Operator Network (DeepONet)" href="README.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -130,6 +129,8 @@
       
       
       
+        
+      
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
@@ -176,8 +177,8 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">DeepONet cantilever example</a></li>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="deeponet.html">DeepONet cantilever example</a></li>
 </ul>
 
     </div>
@@ -232,7 +233,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/DesignSafe-Training/deeponet/blob/main/docs/deeponet.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/DesignSafe-Training/deeponet/blob/main/docs/deeponet-designsafe.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -280,7 +281,7 @@
       
       
       
-      <li><a href="https://github.com/DesignSafe-Training/deeponet/issues/new?title=Issue%20on%20page%20%2Fdeeponet.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/DesignSafe-Training/deeponet/issues/new?title=Issue%20on%20page%20%2Fdeeponet-designsafe.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -310,7 +311,7 @@
       
       
       
-      <li><a href="_sources/deeponet.ipynb" target="_blank"
+      <li><a href="_sources/deeponet-designsafe.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -418,7 +419,6 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="deeponet-cantilever-example">
 <h1>DeepONet cantilever example<a class="headerlink" href="#deeponet-cantilever-example" title="Link to this heading">#</a></h1>
-<p><strong>Solution</strong> <a class="reference external" href="https://jupyter.designsafe-ci.org/hub/user-redirect/lab/tree/CommunityData/Training/Webinar-DeepONet/deeponet.ipynb"><img alt="Try on DesignSafe" src="https://raw.githubusercontent.com/DesignSafe-Training/pinn/main/DesignSafe-Badge.svg" /></a></p>
 <section id="linear-elastic-cantilever-beam-under-displacement-boundary-conditions">
 <h2>Linear elastic cantilever beam under displacement boundary conditions<a class="headerlink" href="#linear-elastic-cantilever-beam-under-displacement-boundary-conditions" title="Link to this heading">#</a></h2>
 <p>Governing equation: <span class="math notranslate nohighlight">\(-\nabla\cdot \sigma = 0\)</span>.</p>
@@ -426,7 +426,18 @@
 <h3>Install packages<a class="headerlink" href="#install-packages" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>jax<span class="o">[</span>cuda<span class="o">]</span><span class="w"> </span>numpy<span class="w"> </span>scikit-learn<span class="w"> </span>flax<span class="w"> </span>scipy<span class="w"> </span>termcolor<span class="w"> </span>tqdm<span class="w"> </span>matplotlib<span class="w"> </span>seaborn<span class="w"> </span>--user<span class="w"> </span>--quiet
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>jax<span class="o">[</span>cpu<span class="o">]</span><span class="w"> </span>numpy<span class="w"> </span>scikit-learn<span class="w"> </span>flax<span class="w"> </span>scipy<span class="w"> </span>termcolor<span class="w"> </span>tqdm<span class="w"> </span>matplotlib<span class="w"> </span>seaborn<span class="w"> </span>--user<span class="w"> </span>--quiet
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">  WARNING: The script pygmentize is installed in &#39;/home/jupyter/.local/bin&#39; which is not on PATH.</span>
+<span class=" -Color -Color-Yellow">  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.</span>
+<span class=" -Color -Color-Yellow">  WARNING: The script markdown-it is installed in &#39;/home/jupyter/.local/bin&#39; which is not on PATH.</span>
+<span class=" -Color -Color-Yellow">  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.</span>
+
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">23.3.1</span> -&gt; <span class=" -Color -Color-Green">24.3.1</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">pip install --upgrade pip</span>
 </pre></div>
 </div>
 </div>
@@ -436,53 +447,67 @@
 <h3>Fetch geometry and trained model data<a class="headerlink" href="#fetch-geometry-and-trained-model-data" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mkdir<span class="w"> </span>-p<span class="w"> </span>deeponet_results
-<span class="o">!</span>curl<span class="w"> </span>-o<span class="w"> </span>deeponet_results/model_params_best.pkl<span class="w"> </span>https://raw.githubusercontent.com/DesignSafe-Training/deeponet/refs/heads/main/model_params_best.pkl
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="c1"># Set and create paths</span>
+<span class="n">home</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~&#39;</span><span class="p">)</span>
+<span class="n">deeponet_root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">home</span><span class="p">,</span> <span class="s1">&#39;MyData&#39;</span><span class="p">,</span> <span class="s1">&#39;deeponet&#39;</span><span class="p">)</span>
+<span class="n">deeponet_results</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">deeponet_root</span><span class="p">,</span> <span class="s1">&#39;deeponet_results&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create directories</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">deeponet_root</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">deeponet_results</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Set environment variables</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DEEPONET_ROOT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">deeponet_root</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DEEPONET_RESULTS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">deeponet_results</span>
+
+<span class="c1"># Verify</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Created directories:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEEPONET_ROOT: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DEEPONET_ROOT&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEEPONET_RESULTS: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DEEPONET_RESULTS&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="c1"># Get the full path from environment variable</span>
+<span class="n">results_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DEEPONET_RESULTS&#39;</span><span class="p">]</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/DesignSafe-Training/deeponet/refs/heads/main/model_params_best.pkl&quot;</span>
+<span class="n">output_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">results_dir</span><span class="p">,</span> <span class="s1">&#39;model_params_best.pkl&#39;</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File downloaded to: </span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to download. Status code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+<span class="c1"># Get the full path from environment variable</span>
+<span class="n">root_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DEEPONET_ROOT&#39;</span><span class="p">]</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/DesignSafe-Training/deeponet/refs/heads/main/cantilever_beam_deflection.mat&quot;</span>
+<span class="n">output_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;cantilever_beam_deflection.mat&#39;</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File downloaded to: </span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to download. Status code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2024-11-13 13:12:18--  https://github.com/DesignSafe-Training/deeponet/raw/refs/heads/main/model_params_best.pkl
-Resolving github.com (github.com)... 140.82.113.3
-Connecting to github.com (github.com)|140.82.113.3|:443... connected.
-HTTP request sent, awaiting response... 302 Found
-Location: https://raw.githubusercontent.com/DesignSafe-Training/deeponet/refs/heads/main/model_params_best.pkl [following]
---2024-11-13 13:12:18--  https://raw.githubusercontent.com/DesignSafe-Training/deeponet/refs/heads/main/model_params_best.pkl
-Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.109.133, 185.199.110.133, ...
-Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 608698 (594K) [application/octet-stream]
-Saving to: ‘deeponet_results/model_params_best.pkl’
-
-model_params_best.p 100%[===================&gt;] 594.43K  --.-KB/s    in 0.05s   
-
-2024-11-13 13:12:19 (10.6 MB/s) - ‘deeponet_results/model_params_best.pkl’ saved [608698/608698]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Created directories:
+DEEPONET_ROOT: /home/jupyter/MyData/deeponet
+DEEPONET_RESULTS: /home/jupyter/MyData/deeponet/deeponet_results
+File downloaded to: /home/jupyter/MyData/deeponet/deeponet_results/model_params_best.pkl
+File downloaded to: /home/jupyter/MyData/deeponet/cantilever_beam_deflection.mat
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>curl<span class="w"> </span>-o<span class="w"> </span>cantilever_beam_deflection.mat<span class="w"> </span>https://raw.githubusercontent.com/DesignSafe-Training/deeponet/refs/heads/main/cantilever_beam_deflection.mat
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2024-11-13 13:12:26--  https://github.com/DesignSafe-Training/deeponet/raw/refs/heads/main/cantilever_beam_deflection.mat
-Resolving github.com (github.com)... 140.82.114.4
-Connecting to github.com (github.com)|140.82.114.4|:443... connected.
-HTTP request sent, awaiting response... 302 Found
-Location: https://raw.githubusercontent.com/DesignSafe-Training/deeponet/refs/heads/main/cantilever_beam_deflection.mat [following]
---2024-11-13 13:12:27--  https://raw.githubusercontent.com/DesignSafe-Training/deeponet/refs/heads/main/cantilever_beam_deflection.mat
-Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.109.133, 185.199.110.133, ...
-Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 20046980 (19M) [application/octet-stream]
-Saving to: ‘cantilever_beam_deflection.mat.1’
-
-cantilever_beam_def 100%[===================&gt;]  19.12M  --.-KB/s    in 0.1s    
-
-2024-11-13 13:12:27 (154 MB/s) - ‘cantilever_beam_deflection.mat.1’ saved [20046980/20046980]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="nb">export</span><span class="w"> </span><span class="nv">JAX_PLATFORMS</span><span class="o">=</span>cpu
 </pre></div>
 </div>
 </div>
@@ -536,7 +561,7 @@ cantilever_beam_def 100%[===================&gt;]  19.12M  --.-KB/s    in 0.1s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>gpu
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cpu
 </pre></div>
 </div>
 </div>
@@ -544,10 +569,16 @@ cantilever_beam_def 100%[===================&gt;]  19.12M  --.-KB/s    in 0.1s
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">save</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">resultdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">&#39;deeponet_results&#39;</span><span class="p">)</span>
+<span class="n">resultdir</span> <span class="o">=</span> <span class="n">deeponet_results</span>
 <span class="k">if</span> <span class="n">save</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">resultdir</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">resultdir</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;results dir: &#39;</span><span class="p">,</span> <span class="n">resultdir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>results dir:  /home/jupyter/MyData/deeponet/deeponet_results
 </pre></div>
 </div>
 </div>
@@ -558,7 +589,8 @@ cantilever_beam_def 100%[===================&gt;]  19.12M  --.-KB/s    in 0.1s
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the data</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">loadmat</span><span class="p">(</span><span class="s1">&#39;./cantilever_beam_deflection.mat&#39;</span><span class="p">)</span> <span class="c1"># Load the .mat file</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expandvars</span><span class="p">(</span><span class="s1">&#39;$DEEPONET_ROOT/cantilever_beam_deflection.mat&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">loadmat</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="c1"># Load the .mat file</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape of loading matrix (Input Function):&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;loading&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1"># Input to deeponet - varying loading conditions</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape of Displacement-X matrix (Output Function):&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;disp_x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1"># Output from deeponet - The corresponding deflection in X-direction</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape of Displacement-Y matrix (Output Function):&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;disp_y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1"># Output from deeponet - The corresponding deflection in Y-direction</span>
@@ -918,7 +950,7 @@ Saved initial model at iteration 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loaded best model parameters
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loaded the best model parameters
 Saved the prediction for all the test samples
 </pre></div>
 </div>
@@ -1077,150 +1109,150 @@ Saved the prediction for all the test samples
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Red">TEST SAMPLE 10</span>
-Rel. L2 Error (X-Displacement) = 0.0047, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0018, R2 score (Y-Displacement) = 1.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TEST SAMPLE 10
+Rel. L2 Error (X-Displacement) = 0.0063, R2 score (X-Displacement) = 0.9999
+Rel. L2 Error (Y-Displacement) = 0.0021, R2 score (Y-Displacement) = 1.0
 </pre></div>
 </div>
-<img alt="_images/2d9cbb2d41a046a43eec861774123c572807d32093a7c8e55b7e687d34f613b9.png" src="_images/2d9cbb2d41a046a43eec861774123c572807d32093a7c8e55b7e687d34f613b9.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 20</span>
-Rel. L2 Error (X-Displacement) = 0.0052, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0029, R2 score (Y-Displacement) = 1.0
+<img alt="_images/05b58524023f2d779ddd488bffb7921bf8e54eecb1ae809fd3be9a0cf19d2b96.png" src="_images/05b58524023f2d779ddd488bffb7921bf8e54eecb1ae809fd3be9a0cf19d2b96.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 20
+Rel. L2 Error (X-Displacement) = 0.0083, R2 score (X-Displacement) = 0.9999
+Rel. L2 Error (Y-Displacement) = 0.004, R2 score (Y-Displacement) = 1.0
 </pre></div>
 </div>
-<img alt="_images/1edd70aff49fd66f24825c97678169b5f61a93e9a93c0188507f8f80147e4af9.png" src="_images/1edd70aff49fd66f24825c97678169b5f61a93e9a93c0188507f8f80147e4af9.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 30</span>
-Rel. L2 Error (X-Displacement) = 0.0048, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0037, R2 score (Y-Displacement) = 1.0
+<img alt="_images/2626659e992b4cd6c7c25020faa55d2479ac310ecd6fc71d50c724473ee39ae5.png" src="_images/2626659e992b4cd6c7c25020faa55d2479ac310ecd6fc71d50c724473ee39ae5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 30
+Rel. L2 Error (X-Displacement) = 0.0057, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0059, R2 score (Y-Displacement) = 1.0
 </pre></div>
 </div>
-<img alt="_images/c5646d77ee6959a5e08fc1d4f73742405e69fc4307ceab7fa8cd380f055e20ea.png" src="_images/c5646d77ee6959a5e08fc1d4f73742405e69fc4307ceab7fa8cd380f055e20ea.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 40</span>
-Rel. L2 Error (X-Displacement) = 0.0051, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0039, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/385ae5b18a0f3c5ae44de78176069d5fff5130939f602d2169c644eb7d7f37c6.png" src="_images/385ae5b18a0f3c5ae44de78176069d5fff5130939f602d2169c644eb7d7f37c6.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 50</span>
-Rel. L2 Error (X-Displacement) = 0.0054, R2 score (X-Displacement) = 0.9999
-Rel. L2 Error (Y-Displacement) = 0.0026, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/b7e67eb33e138794977a558399a86c35d4f73ff96d359dd2cccea4a2785ddeb3.png" src="_images/b7e67eb33e138794977a558399a86c35d4f73ff96d359dd2cccea4a2785ddeb3.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 60</span>
-Rel. L2 Error (X-Displacement) = 0.0102, R2 score (X-Displacement) = 0.9999
-Rel. L2 Error (Y-Displacement) = 0.0024, R2 score (Y-Displacement) = 0.9999
-</pre></div>
-</div>
-<img alt="_images/eb2a89c9f0123e832a598b99249d4c8899e07e75232a99e8adf11c12ab6835c5.png" src="_images/eb2a89c9f0123e832a598b99249d4c8899e07e75232a99e8adf11c12ab6835c5.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 70</span>
+<img alt="_images/a07f9e11fbfdeb5c9e1f2d409fb96c4b1d8f48b76b282dca891b17dbc65b2d96.png" src="_images/a07f9e11fbfdeb5c9e1f2d409fb96c4b1d8f48b76b282dca891b17dbc65b2d96.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 40
 Rel. L2 Error (X-Displacement) = 0.0067, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0032, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/2ab3834eb09ec413e394b003c441c589a18a23feb3b76b83361129adaf6baffc.png" src="_images/2ab3834eb09ec413e394b003c441c589a18a23feb3b76b83361129adaf6baffc.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 80</span>
-Rel. L2 Error (X-Displacement) = 0.0048, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0023, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/9311616705c9d6b25ec3c80a1a8ff491e511e272192d4c796aae6f0cdf532b30.png" src="_images/9311616705c9d6b25ec3c80a1a8ff491e511e272192d4c796aae6f0cdf532b30.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 90</span>
-Rel. L2 Error (X-Displacement) = 0.0048, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0027, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/191e708a1d34e14d543a3735956fd2c90532c0172a7ab2ef3e1274f69d074865.png" src="_images/191e708a1d34e14d543a3735956fd2c90532c0172a7ab2ef3e1274f69d074865.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 100</span>
-Rel. L2 Error (X-Displacement) = 0.0059, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0028, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/57990c0e9d6f1a626e962466030989ba02a14102ab8cb743e682b02d08613fe2.png" src="_images/57990c0e9d6f1a626e962466030989ba02a14102ab8cb743e682b02d08613fe2.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 110</span>
-Rel. L2 Error (X-Displacement) = 0.0036, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0031, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/27913e1a6a31eee7f99ebd2c95a580f3ed83ca23889284c0f80ec33537f20d52.png" src="_images/27913e1a6a31eee7f99ebd2c95a580f3ed83ca23889284c0f80ec33537f20d52.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 120</span>
-Rel. L2 Error (X-Displacement) = 0.0091, R2 score (X-Displacement) = 0.9999
 Rel. L2 Error (Y-Displacement) = 0.0045, R2 score (Y-Displacement) = 1.0
 </pre></div>
 </div>
-<img alt="_images/ed257a10186e3a3d7a7eb7d9059f25937857dd211219f26f9be60ad7dbca9ef1.png" src="_images/ed257a10186e3a3d7a7eb7d9059f25937857dd211219f26f9be60ad7dbca9ef1.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 130</span>
-Rel. L2 Error (X-Displacement) = 0.0057, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0022, R2 score (Y-Displacement) = 1.0
+<img alt="_images/e15c5ba950a5653863e51aea7c1b24b35b384862d92ec6672d148661752d7273.png" src="_images/e15c5ba950a5653863e51aea7c1b24b35b384862d92ec6672d148661752d7273.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 50
+Rel. L2 Error (X-Displacement) = 0.0071, R2 score (X-Displacement) = 0.9999
+Rel. L2 Error (Y-Displacement) = 0.0033, R2 score (Y-Displacement) = 1.0
 </pre></div>
 </div>
-<img alt="_images/01da20aabee07b46d1f6d195188c4a65f365e25c88eb4533b5925b417f54dba5.png" src="_images/01da20aabee07b46d1f6d195188c4a65f365e25c88eb4533b5925b417f54dba5.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 140</span>
-Rel. L2 Error (X-Displacement) = 0.0041, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0026, R2 score (Y-Displacement) = 1.0
+<img alt="_images/16962e187c3665cc884c0b3d4ba001bb9d60efb7d9348c68f4e83aafb11086e5.png" src="_images/16962e187c3665cc884c0b3d4ba001bb9d60efb7d9348c68f4e83aafb11086e5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 60
+Rel. L2 Error (X-Displacement) = 0.0155, R2 score (X-Displacement) = 0.9997
+Rel. L2 Error (Y-Displacement) = 0.0038, R2 score (Y-Displacement) = 0.9999
 </pre></div>
 </div>
-<img alt="_images/9033e876779a49b14a9df2afb66712a14f32f010ebe96217c132ef1d02a14528.png" src="_images/9033e876779a49b14a9df2afb66712a14f32f010ebe96217c132ef1d02a14528.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 150</span>
-Rel. L2 Error (X-Displacement) = 0.0106, R2 score (X-Displacement) = 0.9999
-Rel. L2 Error (Y-Displacement) = 0.0038, R2 score (Y-Displacement) = 1.0
+<img alt="_images/d1f4f4f1c48f90f9b76adb1dece799e724fca928075db9904b608c86b31d79af.png" src="_images/d1f4f4f1c48f90f9b76adb1dece799e724fca928075db9904b608c86b31d79af.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 70
+Rel. L2 Error (X-Displacement) = 0.008, R2 score (X-Displacement) = 0.9999
+Rel. L2 Error (Y-Displacement) = 0.0043, R2 score (Y-Displacement) = 1.0
 </pre></div>
 </div>
-<img alt="_images/8c7ae3376df470c7e61659011b08a34834ec434eb3312075aa24b1da2cf64a0a.png" src="_images/8c7ae3376df470c7e61659011b08a34834ec434eb3312075aa24b1da2cf64a0a.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 160</span>
-Rel. L2 Error (X-Displacement) = 0.0049, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0031, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/adfe3860ff8a8611de41e30671da76133ef14a9d8ec4379c85048fd0c9e621ea.png" src="_images/adfe3860ff8a8611de41e30671da76133ef14a9d8ec4379c85048fd0c9e621ea.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 170</span>
-Rel. L2 Error (X-Displacement) = 0.0077, R2 score (X-Displacement) = 0.9999
-Rel. L2 Error (Y-Displacement) = 0.0029, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/b69b962c89de3fb07098282cfe96474ecd9c22625b5c100a00c6650332782a8f.png" src="_images/b69b962c89de3fb07098282cfe96474ecd9c22625b5c100a00c6650332782a8f.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 180</span>
-Rel. L2 Error (X-Displacement) = 0.0038, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0028, R2 score (Y-Displacement) = 1.0
-</pre></div>
-</div>
-<img alt="_images/b6b67ec581239923c25b6001512a9e2242e3f395050b4e9ff04ac8aeb86e0857.png" src="_images/b6b67ec581239923c25b6001512a9e2242e3f395050b4e9ff04ac8aeb86e0857.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 190</span>
-Rel. L2 Error (X-Displacement) = 0.0055, R2 score (X-Displacement) = 1.0
+<img alt="_images/8a4b39c4dc993cc16235dc087c891f13efe95e6a975713793415e68aa9526223.png" src="_images/8a4b39c4dc993cc16235dc087c891f13efe95e6a975713793415e68aa9526223.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 80
+Rel. L2 Error (X-Displacement) = 0.0061, R2 score (X-Displacement) = 1.0
 Rel. L2 Error (Y-Displacement) = 0.0034, R2 score (Y-Displacement) = 1.0
 </pre></div>
 </div>
-<img alt="_images/30299b8252ac66f685becbbe445270f3db8e1d3502bf9d44ca0f5d3918557301.png" src="_images/30299b8252ac66f685becbbe445270f3db8e1d3502bf9d44ca0f5d3918557301.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
-<span class=" -Color -Color-Red">TEST SAMPLE 200</span>
-Rel. L2 Error (X-Displacement) = 0.0043, R2 score (X-Displacement) = 1.0
-Rel. L2 Error (Y-Displacement) = 0.0031, R2 score (Y-Displacement) = 1.0
+<img alt="_images/ef3bb3b3d31c2fd5e2a91b8c762e9683007ea24211b790401a35c8189242455f.png" src="_images/ef3bb3b3d31c2fd5e2a91b8c762e9683007ea24211b790401a35c8189242455f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 90
+Rel. L2 Error (X-Displacement) = 0.0056, R2 score (X-Displacement) = 0.9999
+Rel. L2 Error (Y-Displacement) = 0.0032, R2 score (Y-Displacement) = 1.0
 </pre></div>
 </div>
-<img alt="_images/0f482500f6e3efb84d3a5dd0248d001eea0302de1664dd61284e148b5ac95ef1.png" src="_images/0f482500f6e3efb84d3a5dd0248d001eea0302de1664dd61284e148b5ac95ef1.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">######################################################################################################################################################################################################################################</span>
+<img alt="_images/d2ba36b2beba5cae05be9714d7b1662112a204303d8b2569dd5004e24401aa10.png" src="_images/d2ba36b2beba5cae05be9714d7b1662112a204303d8b2569dd5004e24401aa10.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 100
+Rel. L2 Error (X-Displacement) = 0.0084, R2 score (X-Displacement) = 0.9999
+Rel. L2 Error (Y-Displacement) = 0.0034, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/764d814ad9c1943150e6603b3848461c2a6eced684ba1724005bb12cc6265051.png" src="_images/764d814ad9c1943150e6603b3848461c2a6eced684ba1724005bb12cc6265051.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 110
+Rel. L2 Error (X-Displacement) = 0.0052, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0038, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/679b0c9045585d291d04bb3ac59a3163c6918817406247f1757f035529523bac.png" src="_images/679b0c9045585d291d04bb3ac59a3163c6918817406247f1757f035529523bac.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 120
+Rel. L2 Error (X-Displacement) = 0.0109, R2 score (X-Displacement) = 0.9999
+Rel. L2 Error (Y-Displacement) = 0.0055, R2 score (Y-Displacement) = 0.9999
+</pre></div>
+</div>
+<img alt="_images/98e13c42b8aa1a547a874a10610c8eca262a17f20383bac7bb6938b5ddeca510.png" src="_images/98e13c42b8aa1a547a874a10610c8eca262a17f20383bac7bb6938b5ddeca510.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 130
+Rel. L2 Error (X-Displacement) = 0.0062, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.003, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/89c72b1608c7fc9f9d892368245e6c1e633e4d79a52ab8e8763b464be8d27ebb.png" src="_images/89c72b1608c7fc9f9d892368245e6c1e633e4d79a52ab8e8763b464be8d27ebb.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 140
+Rel. L2 Error (X-Displacement) = 0.0036, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0023, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/4dc5cedf94187245f7378c7e9edade47db3f214e7e488b52684f7afab20df5b3.png" src="_images/4dc5cedf94187245f7378c7e9edade47db3f214e7e488b52684f7afab20df5b3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 150
+Rel. L2 Error (X-Displacement) = 0.0137, R2 score (X-Displacement) = 0.9998
+Rel. L2 Error (Y-Displacement) = 0.0046, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/26ac6660a1d3a1052ef5d3c029ab2b6aca6d15feda4a3366d6d562e272e182cb.png" src="_images/26ac6660a1d3a1052ef5d3c029ab2b6aca6d15feda4a3366d6d562e272e182cb.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 160
+Rel. L2 Error (X-Displacement) = 0.0051, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0027, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/ce2125336f269b5f87904718fcc47aad0bee079500d0833f77dd3223fa050b79.png" src="_images/ce2125336f269b5f87904718fcc47aad0bee079500d0833f77dd3223fa050b79.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 170
+Rel. L2 Error (X-Displacement) = 0.0094, R2 score (X-Displacement) = 0.9999
+Rel. L2 Error (Y-Displacement) = 0.0036, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/3365f89935b3c3a9731a2782927d192de65a08bb60ffad239f86ea79fecf5f2e.png" src="_images/3365f89935b3c3a9731a2782927d192de65a08bb60ffad239f86ea79fecf5f2e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 180
+Rel. L2 Error (X-Displacement) = 0.0053, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0046, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/0e0f902ca4d5f27b5e4b6e84846a6a0c6707d1cb9044fbffdd579e426efd298e.png" src="_images/0e0f902ca4d5f27b5e4b6e84846a6a0c6707d1cb9044fbffdd579e426efd298e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 190
+Rel. L2 Error (X-Displacement) = 0.0073, R2 score (X-Displacement) = 0.9999
+Rel. L2 Error (Y-Displacement) = 0.0054, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/7c292be7f19499a72263bc2f8df0fba9cb737beff89627baf3dbfe7f980f7aaf.png" src="_images/7c292be7f19499a72263bc2f8df0fba9cb737beff89627baf3dbfe7f980f7aaf.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
+TEST SAMPLE 200
+Rel. L2 Error (X-Displacement) = 0.0052, R2 score (X-Displacement) = 1.0
+Rel. L2 Error (Y-Displacement) = 0.0028, R2 score (Y-Displacement) = 1.0
+</pre></div>
+</div>
+<img alt="_images/ee69d5093cc99a626307589903861b26168701703a8f623cbeda8f86e96b6af5.png" src="_images/ee69d5093cc99a626307589903861b26168701703a8f623cbeda8f86e96b6af5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>######################################################################################################################################################################################################################################
 Mean Squared Error Test (X-Displacement):
- 4.613826930288667e-08
+ 8.913260053589056e-08
 Mean Squared Error Test (Y-Displacement):
- 2.9578710442734745e-07
+ 4.97692285517104e-07
 </pre></div>
 </div>
 </div>
@@ -1259,15 +1291,6 @@ Mean Squared Error Test (Y-Displacement):
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="README.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Deep Operator Network (DeepONet)</p>
-      </div>
-    </a>
 </div>
                 </footer>
               
